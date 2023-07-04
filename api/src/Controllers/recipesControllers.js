@@ -28,12 +28,30 @@ const mostrarAllRecipe = async () => {
   return data;
 };
 
-const getRecipeData = () => {
-
+const getRecipeData = async (typeData, data) => {
+  const response =
+    typeData === "nombre"
+      ? await Recipe.findAll({
+          where: {
+            name: data,
+          },
+          include: {
+            model: Diets,
+            attributes: ["name"],
+          },
+        })
+      : await Recipe.findByPk(data, {
+          include: {
+            model: Diets,
+            attributes: ["name"],
+          },
+        });
+  return response;
 };
 
 module.exports = {
   createRecipes,
   buscarRecipe,
   mostrarAllRecipe,
+  getRecipeData,
 };
