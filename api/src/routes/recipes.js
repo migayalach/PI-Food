@@ -1,7 +1,15 @@
 const { Router } = require("express");
-const { getRecipe } = require("../Handlers/recipes");
+const { createRecipeHandler, getRecipesHandler, getRecipeHandler } = require("../Handlers/recipes");
 const recipesRouter = Router();
 
-recipesRouter.get("/", getRecipe);
+// CREAR RECIPE
+recipesRouter.post("/", createRecipeHandler);
 
+//TRAE TODAS LAS RECETAS SI NO SE MANDA UN QUERY, PERO SI SE MANDA TRAE LO QUE SE BUSCA
+recipesRouter.get("/", getRecipesHandler);
+
+// BUSCA POR ID RECIBIDO POR PARAMS
+recipesRouter.get("/:idRecipe", getRecipeHandler);
+
+// recipesRouter.post("/", createRecipe);
 module.exports = recipesRouter;
