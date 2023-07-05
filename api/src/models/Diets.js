@@ -3,6 +3,7 @@ module.exports = (sequelize) => {
   sequelize.define("diets", {
     id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     name: {
