@@ -9,14 +9,15 @@ const SUCCESS = 200,
 
 //CREAR RECIPE
 const createRecipeHandler = async (request, response) => {
-  const { nombre, imagen, resumen, nivel, pasoApaso } = request.body;
+  const { nombre, imagen, resumen, nivel, pasoApaso, dieta } = request.body;
   try {
     const newRecipe = await createRecipes(
       nombre,
       imagen,
       resumen,
       nivel,
-      pasoApaso
+      pasoApaso,
+      dieta
     );
     response.status(SUCCESS).json({ success: newRecipe });
   } catch (error) {
@@ -38,6 +39,7 @@ const getRecipesHandler = async (request, response) => {
 // MUESTRA DATOS POR ID -> PARAMS
 const getRecipeHandler = async (request, response) => {
   const { idRecipe } = request.params;
+  console.log(idRecipe);
   const typeData = isNaN(idRecipe) ? "nombre" : "id";
   try {
     const reciper = await getRecipeData(typeData, idRecipe);

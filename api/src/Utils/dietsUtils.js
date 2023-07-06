@@ -24,61 +24,12 @@ const newObj = (arr) =>
     return { name: diet };
   });
 
+const resCreateRecipe = (
+  { id, created, name, image, resumenPlato, nivel, pasoApaso },
+  diet
+) => (obj = { id, created, name, image, resumenPlato, nivel, pasoApaso, diet });
+
 module.exports = {
   clearArray,
+  resCreateRecipe
 };
-
-
-
-// https://api.spoonacular.com/recipes/complexSearch?apiKey=ad4a2ed956bf4120810ff3d859380cbf&addRecipeInformation=true
-
-// const results = [
-//   {
-//     diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
-//   },
-//   {
-//     diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
-//   },
-//   {
-//     diets: ["lacto ovo vegetarian"],
-//   },
-//   {
-//     diets: ["gluten free", "dairy free"],
-//   },
-//   {
-//     diets: [
-//       "gluten free",
-//       "dairy free",
-//       "paleolithic",
-//       "lacto ovo vegetarian",
-//       "primal",
-//       "vegan",
-//     ],
-//   },
-//   {
-//     diets: [
-//       "gluten free",
-//       "dairy free",
-//       "paleolithic",
-//       "lacto ovo vegetarian",
-//       "primal",
-//       "whole 30",
-//       "vegan",
-//     ],
-//   },
-//   {
-//     diets: ["gluten free", "dairy free"],
-//   },
-//   {
-//     diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
-//   },
-//   {
-//     diets: ["gluten free"],
-//   },
-//   {
-//     diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
-//   },
-// ];
-
-// console.log(mapeando(results));
-// // ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan", "paleolithic", "primal", "whole 30",]
