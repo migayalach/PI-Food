@@ -40,7 +40,7 @@ const getRecipesHandler = async (request, response) => {
 const getRecipeHandler = async (request, response) => {
   const { idRecipe } = request.params;
   console.log(idRecipe);
-  const typeData = isNaN(idRecipe) ? "nombre" : "id";
+  const typeData = isNaN(idRecipe) ? "bdd" : "api";
   try {
     const reciper = await getRecipeData(typeData, idRecipe);
     response.status(SUCCESS).json(reciper);
