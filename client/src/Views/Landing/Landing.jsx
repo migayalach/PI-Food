@@ -1,10 +1,10 @@
 import React from "react";
+import validation from "../../Utils/validation";
 
 const Landing = () => {
   return (
     <div>
-      <h1>Estamos en Landing</h1>
-      <p>Aca va la bienvenida</p>
+      <button>Ingresar</button>
     </div>
   );
 };
