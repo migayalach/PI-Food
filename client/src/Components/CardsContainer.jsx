@@ -1,12 +1,13 @@
 import React from "react";
 import Card from "./Card";
 import { useSelector } from "react-redux";
+// import data from "../Utils/data";
 
-const CardsContainer = () => {
-  const data = useSelector((state) => state.recipe);
+const CardsContainer = ({characters}) => {
+  // const data = useSelector((state) => state.recipe);
   return (
     <div>
-      {data.map(({ id, title, image, summary, diets }) => (
+      {characters.map(({ id, title, image, summary, diets }) => (
         <Card
           key={id}
           title={title}

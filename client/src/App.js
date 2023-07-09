@@ -7,7 +7,7 @@ function App() {
   const location =  useLocation();
   return (
     <div className="App">
-      {location.pathname !== "/" && <NavBar/>}
+      {/* {location.pathname !== "/" && <NavBar/>} */}
       <Route exact path="/" component={Landing} />
       <Route exact path="/detail" component={Detail} />
       <Route exact path="/create" component={Form} />

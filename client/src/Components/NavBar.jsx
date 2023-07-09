@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-const NavBar = () => {
+import SearchBar from "./SearchBar";
+
+const NavBar = ({ onSearch }) => {
   return (
     <div>
-      <Link to="/home">Home</Link>
-      <Link to="/create">Form</Link>
+      {/* <Link to="/home">Home</Link>
+      <Link to="/create">Form</Link> */}
+      <SearchBar onSearch={onSearch} />
     </div>
   );
 };
