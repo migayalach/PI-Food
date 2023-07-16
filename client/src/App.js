@@ -2,7 +2,8 @@ import axios from "axios";
 // HOOK'S
 import { useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
-
+import { addFav, removeFav } from "./Redux/actions";
+import { connect } from "react-redux";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -17,7 +18,7 @@ import Landing from "./Components/Landing";
 import NavBar from "./Components/NavBar";
 import Favorites from "./Components/Favorites";
 
-const App = () => {
+const App = ({ removeFav }) => {
   const location = useLocation();
   const [characters, setCharacters] = useState([]);
   const arr = [];
@@ -54,6 +55,7 @@ const App = () => {
   const onClose = (idParams) => {
     const newCharacter = characters.filter(({ id }) => id !== +idParams);
     setCharacters(newCharacter);
+    removeFav(idParams);
   };
 
   const logout = () => {
@@ -85,4 +87,19 @@ const App = () => {
   );
 };
 
-export default App;
+// DESPACHA LAS FUNCIONES
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFav: (recipe) => dispatch(addFav(recipe)),
+    removeFav: (id) => dispatch(removeFav(id)),
+  };
+};
+
+// TRAE EL ESTO GLOVAL
+const mapStateToProps = (state) => {
+  return {
+    myFavorites: state.myFavorites,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

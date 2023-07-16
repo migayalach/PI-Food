@@ -16,7 +16,7 @@ const Card = ({
 }) => {
   const [isFav, setIsFav] = useState(false);
   const handleFavorite = () => {
-    if (isFav === true) {
+    if (isFav) {
       setIsFav(false);
       removeFav(id);
     } else {
@@ -40,7 +40,9 @@ const Card = ({
       ) : (
         <button onClick={handleFavorite}>🤍</button>
       )}
+      
       <button onClick={() => onClose(id)}>X</button>
+
       <Link to={`/detail/${id}`}>
         <p>{title}</p>
       </Link>
