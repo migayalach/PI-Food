@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       nivel: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       pasoApaso: {

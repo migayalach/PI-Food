@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 
+
 // CSS
 import "./StyleSheets/App.css";
 
@@ -14,6 +15,7 @@ import Error from "./Components/Error";
 import Form from "./Components/Form";
 import Landing from "./Components/Landing";
 import NavBar from "./Components/NavBar";
+import Favorites from "./Components/Favorites";
 
 const App = () => {
   const location = useLocation();
@@ -73,6 +75,8 @@ const App = () => {
         </Route>
 
         <Route path="/about" component={About} />
+        <Route path="/favorites" component={Favorites} />
+
         <Route path="/detail/:id" component={Detail} />
         <Route path=":id" component={Error} />
         <Route path="/" component={Landing} />

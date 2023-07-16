@@ -15,6 +15,9 @@ const NavBar = ({ onSearch, logout }) => {
         <NavLink to="/form">Crear una receta nueva</NavLink>
       </button>
       <button>
+        <NavLink to="/favorites"> Favoritos </NavLink>
+      </button>
+      <button>
         <NavLink to="/">Salir</NavLink>
       </button>
     </div>
