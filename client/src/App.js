@@ -18,7 +18,7 @@ import Landing from "./Components/Landing";
 import NavBar from "./Components/NavBar";
 import Favorites from "./Components/Favorites";
 
-const App = ({ removeFav }) => {
+const App = ({ removeFav, myFavorites }) => {
   const location = useLocation();
   const [characters, setCharacters] = useState([]);
   const arr = [];
@@ -80,7 +80,7 @@ const App = ({ removeFav }) => {
         <Route path="/favorites" component={Favorites} />
 
         <Route path="/detail/:id" component={Detail} />
-        <Route path=":id" component={Error} />
+        <Route path="/:id" component={Error} />
         <Route path="/" component={Landing} />
       </Switch>
     </div>
@@ -90,16 +90,8 @@ const App = ({ removeFav }) => {
 // DESPACHA LAS FUNCIONES
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFav: (recipe) => dispatch(addFav(recipe)),
     removeFav: (id) => dispatch(removeFav(id)),
   };
 };
 
-// TRAE EL ESTO GLOVAL
-const mapStateToProps = (state) => {
-  return {
-    myFavorites: state.myFavorites,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
