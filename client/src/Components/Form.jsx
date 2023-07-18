@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import validation from "../Utils/validation";
-import data from "../Utils/data";
+import { useDispatch } from "react-redux";
+import { addRecipe } from "../Redux/actions";
 
-const Form = ({ addData }) => {
+const Form = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     nombre: "",
     resumen: "",
@@ -48,7 +50,7 @@ const Form = ({ addData }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addData(data);
+    dispatch(addRecipe(data));
   };
 
   // const delEspacios = (str, name) => {

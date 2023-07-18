@@ -21,10 +21,9 @@ import Favorites from "./Components/Favorites";
 // REDUX
 import { getRecipes } from "./Redux/actions";
 
-const App = ({ removeFav, myFavorites }) => {
+const App = ({ removeFav }) => {
   const location = useLocation();
   const [characters, setCharacters] = useState([]);
-  const arr = [];
 
   const onSearch = (id) => {
     axios(
@@ -46,12 +45,6 @@ const App = ({ removeFav, myFavorites }) => {
     dispatch(getRecipes());
   }, [dispatch]);
   //hasta aqui
-  
-  const addData = (data) => {
-    console.log();
-    arr.push(data);
-    console.log(arr);
-  };
 
   const checkDiet = (id, characters) => {
     let aux = false;
@@ -84,10 +77,7 @@ const App = ({ removeFav, myFavorites }) => {
           <CardsContainer characters={characters} onClose={onClose} />
         </Route>
 
-        <Route path="/form">
-          <Form addData={addData} />
-        </Route>
-
+        <Route path="/form" component={Form} />
         <Route path="/about" component={About} />
         <Route path="/favorites" component={Favorites} />
 

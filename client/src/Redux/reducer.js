@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, GET_RECIPES } from "./actionsType";
+import { ADD_FAV, REMOVE_FAV, GET_RECIPES, ADD_RECIPE } from "./actionsType";
 
 const initialState = {
   myFavorites: [],
@@ -11,6 +11,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         recipes: payload,
+      };
+
+    case ADD_RECIPE:
+      return {
+        ...state,
+        recipes: [...state.recipes, payload],
       };
 
     case ADD_FAV:
