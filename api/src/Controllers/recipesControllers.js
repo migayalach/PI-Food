@@ -8,7 +8,8 @@ const {
 } = require("../Utils/recipeUtils");
 const axios = require("axios");
 const { API_KEY } = process.env;
-const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=10&addRecipeInformation=true`;
+// const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
+const URL = `https://rickandmortyapi.com/api/character`;
 
 const createRecipes = async (
   nombre,

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { addFav, removeFav } from "./Redux/actions";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -17,6 +17,9 @@ import Form from "./Components/Form";
 import Landing from "./Components/Landing";
 import NavBar from "./Components/NavBar";
 import Favorites from "./Components/Favorites";
+
+// REDUX
+import { getRecipes } from "./Redux/actions";
 
 const App = ({ removeFav, myFavorites }) => {
   const location = useLocation();
@@ -37,8 +40,17 @@ const App = ({ removeFav, myFavorites }) => {
     });
   };
 
+  // nuevo
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRecipes());
+  }, [dispatch]);
+  //hasta aqui
+  
   const addData = (data) => {
+    console.log();
     arr.push(data);
+    console.log(arr);
   };
 
   const checkDiet = (id, characters) => {

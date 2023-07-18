@@ -1,4 +1,6 @@
 import axios from "axios";
+
+
 // HOOK'S
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -8,7 +10,7 @@ const Detail = () => {
   const [character, setCharacter] = useState({});
   useEffect(() => {
     axios(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=ad4a2ed956bf4120810ff3d859380cbf`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=8f3ff4a53b5f4cda9f4208ab3e0d674b `
     ).then(({ data }) => {
       if (data.id) {
         setCharacter(data);

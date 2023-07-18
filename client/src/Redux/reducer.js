@@ -1,11 +1,18 @@
-import { ADD_FAV, REMOVE_FAV } from "./actionsType";
+import { ADD_FAV, REMOVE_FAV, GET_RECIPES } from "./actionsType";
 
 const initialState = {
   myFavorites: [],
+  recipes: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_RECIPES:
+      return {
+        ...state,
+        recipes: payload,
+      };
+
     case ADD_FAV:
       return {
         ...state,

@@ -140,7 +140,7 @@ const Form = ({ addData }) => {
         <br />
         <br />
         {/* {console.log(Object.entries(errors).length === 0)} */}
-        {Object.entries(errors).length === 0 ? (
+        {Object.entries(errors).length !== 0 ? (
           <button>Submit</button>
         ) : (
           <p>hay errores</p>
