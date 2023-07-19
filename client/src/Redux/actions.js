@@ -1,5 +1,12 @@
 import axios from "axios";
-import { ADD_FAV, REMOVE_FAV, GET_RECIPES, ADD_RECIPE } from "./actionsType";
+import {
+  ADD_FAV,
+  REMOVE_FAV,
+  GET_RECIPES,
+  ADD_RECIPE,
+  SEARCH_RECIPE,
+} from "./actionsType";
+
 const URL = `http://localhost:3001/recipes`;
 
 export const addFav = (recipe) => {
@@ -30,19 +37,21 @@ export const getRecipes = () => {
 export const addRecipe = (recipe) => {
   return async function (dispatch) {
     let obj = {};
-    for(let i in recipe){
+    for (let i in recipe) {
       obj = {
-        "nombre": recipe.nombre, 
-        "imagen" : recipe.imagen, 
-        "resumen": recipe.resumen, 
-        "nivel" : recipe.nivelComida, 
-        "pasoApaso" : recipe.pasoApaso, 
-        "dieta" : recipe.dietas
-      }
+        nombre: recipe.nombre,
+        imagen: recipe.imagen,
+        resumen: recipe.resumen,
+        nivel: recipe.nivelComida,
+        pasoApaso: recipe.pasoApaso,
+        dieta: recipe.dietas,
+      };
     }
-    console.log(obj);
     try {
-      const createRecipe = await axios.post(`http://localhost:3001/recipes`, obj);
+      const createRecipe = await axios.post(
+        `http://localhost:3001/recipes`,
+        obj
+      );
       const newRecipe = createRecipe.data;
       dispatch({
         type: ADD_RECIPE,
@@ -51,5 +60,16 @@ export const addRecipe = (recipe) => {
     } catch (error) {
       alert("No se pudo crear");
     }
+  };
+};
+
+export const searchRec = (recipe) => {
+  return async function (dispatch) {
+    const response = await axios.get(`${URL}?name=${recipe}`);
+    const recipeData = response.data;
+    dispatch({
+      type: SEARCH_RECIPE,
+      payload: recipeData,
+    });
   };
 };

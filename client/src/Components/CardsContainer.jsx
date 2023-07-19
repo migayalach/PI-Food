@@ -1,38 +1,9 @@
-// import React from "react";
-// import { useSelector } from "react-redux";
-// import Card from "./Card";
-// import Pagination from "./Pagination";
-
-// const CardsContainer = ({ onClose }) => {
-//   const recipe = useSelector((state) => state.recipes);
-//   const data = recipe.length;
-//   return (
-//     <div>
-//       {recipe.map(({ id, title, image, summary, diets }) => (
-//         <Card
-//           key={id}
-//           id={id}
-//           title={title}
-//           image={image}
-//           summary={summary}
-//           diets={diets}
-//           onClose={onClose}
-//         />
-//       ))}
-//       <Pagination data={data}/>
-//     </div>
-//   );
-// };
-
-// export default CardsContainer;
-
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import Pagination from "./Pagination";
 
-const ItemsPerPage = 9; // Cantidad de elementos por página
+const ItemsPerPage = 9;
 
 const CardsContainer = ({ onClose }) => {
   const recipe = useSelector((state) => state.recipes);
@@ -45,7 +16,7 @@ const CardsContainer = ({ onClose }) => {
   const indexOfLastItem = currentPage * ItemsPerPage;
   const indexOfFirstItem = indexOfLastItem - ItemsPerPage;
   const currentRecipes = recipe.slice(indexOfFirstItem, indexOfLastItem);
-
+  
   return (
     <div>
       {currentRecipes.map(({ id, title, image, summary, diets }) => (
@@ -54,7 +25,7 @@ const CardsContainer = ({ onClose }) => {
           id={id}
           title={title}
           image={image}
-          summary={summary}
+          // summary={summary}
           diets={diets}
           onClose={onClose}
         />

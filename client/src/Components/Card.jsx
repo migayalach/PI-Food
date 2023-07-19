@@ -40,7 +40,7 @@ const Card = ({
       ) : (
         <button onClick={handleFavorite}>🤍</button>
       )}
-      
+
       <button onClick={() => onClose(id)}>X</button>
 
       <Link to={`/detail/${id}`}>
@@ -48,7 +48,12 @@ const Card = ({
       </Link>
       <img src={image} alt={`Fotografia de: ${title}`} />
       <p>{summary}</p>
-      <p>{diets}</p>
+      <h3>dietas</h3>
+      <ul>
+        {diets.map((diet, index) => (
+          <li key={index}>{diet}</li>
+        ))}
+      </ul>
     </div>
   );
 };

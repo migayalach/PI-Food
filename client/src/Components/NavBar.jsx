@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 const NavBar = ({ onSearch, logout }) => {
   return (
     <div>
-      <SearchBar onSearch={onSearch} />
+      <SearchBar />
       <button>
         <NavLink to="/home">Home</NavLink>
       </button>

@@ -5,11 +5,11 @@ const {
   newArrRecipe,
   responseBdd,
   searchApi,
+  dataClear,
 } = require("../Utils/recipeUtils");
 const axios = require("axios");
 const { API_KEY } = process.env;
-// const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
-const URL = `https://rickandmortyapi.com/api/character`;
+const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=20&addRecipeInformation=true`;
 
 const createRecipes = async (
   nombre,
@@ -65,8 +65,10 @@ const mostrarAllRecipe = async () => {
   const data = await Recipe.findAll({
     include: [{ model: Diets }],
   });
+  const dataRes = dataClear(data);
+
   const apiRecipe = newArrRecipe(apiRecipes);
-  return [...data, ...apiRecipe];
+  return [...dataRes, ...apiRecipe];
 };
 
 const getRecipeData = async (typeData, data) => {

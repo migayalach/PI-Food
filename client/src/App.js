@@ -22,40 +22,14 @@ import Favorites from "./Components/Favorites";
 import { getRecipes } from "./Redux/actions";
 
 const App = ({ removeFav }) => {
+  const [card, setCard] = useState(0);
   const location = useLocation();
   const [characters, setCharacters] = useState([]);
-
-  const onSearch = (id) => {
-    axios(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=ad4a2ed956bf4120810ff3d859380cbf`
-    ).then(({ data }) => {
-      const respuesta = checkDiet(data.id, characters);
-      if (respuesta === true)
-        window.alert("La dieta ya existe no se puede repetir :C");
-      else {
-        if (data.id) setCharacters((oldChars) => [...oldChars, data]);
-        else window.alert("¡No hay dieta con este ID!");
-      }
-    });
-  };
-
-  // nuevo
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRecipes());
   }, [dispatch]);
-  //hasta aqui
-
-  const checkDiet = (id, characters) => {
-    let aux = false;
-    for (const i of characters) {
-      if (id === i.id) {
-        aux = true;
-        break;
-      }
-    }
-    return aux;
-  };
 
   const onClose = (idParams) => {
     const newCharacter = characters.filter(({ id }) => id !== +idParams);
@@ -69,9 +43,7 @@ const App = ({ removeFav }) => {
 
   return (
     <div className="App">
-      {location.pathname !== "/" && (
-        <NavBar onSearch={onSearch} logout={logout} />
-      )}
+      {location.pathname !== "/" && <NavBar logout={logout} />}
       <Switch>
         <Route path="/home">
           <CardsContainer characters={characters} onClose={onClose} />
@@ -80,10 +52,10 @@ const App = ({ removeFav }) => {
         <Route path="/form" component={Form} />
         <Route path="/about" component={About} />
         <Route path="/favorites" component={Favorites} />
-
         <Route path="/detail/:id" component={Detail} />
         <Route path="/:id" component={Error} />
         <Route path="/" component={Landing} />
+
       </Switch>
     </div>
   );

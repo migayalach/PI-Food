@@ -1,28 +1,24 @@
-import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchRec } from "../Redux/actions";
 
-const SearchBar = ({ onSearch }) => {
-  const [id, setId] = useState("");
+const SearchBar = () => {
+  const dispatch = useDispatch();
+
+  const [recipe, setRecipe] = useState("");
   const handleChange = (event) => {
-    setId(event.target.value);
+    setRecipe(event.target.value);
   };
 
   const callback = () => {
-    onSearch(id);
-    setId("");
-  };
-
-  const personajeAleatorio = () => {
-    const id = Math.floor(Math.random() * (100 - 0 + 1) + 0);
-    onSearch(id);
-    setId("");
+    dispatch(searchRec(recipe));
+    setRecipe("");
   };
 
   return (
     <div>
-      <input type="seach" onChange={handleChange} value={id} />
-      <button onClick={callback}>Agregar</button>
-      <button onClick={personajeAleatorio}>Random</button>
+      <input type="seach" onChange={handleChange} value={recipe} />
+      <button onClick={callback}>Buscar</button>
     </div>
   );
 };
