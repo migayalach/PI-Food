@@ -8,6 +8,7 @@ import {
   SEARCH_REC_ID,
   GET_DIETS,
   ORDER_DIETS,
+  ORIGIN_DATA,
 } from "./actionsType";
 import { newObjAddRec } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
@@ -91,5 +92,12 @@ export const orderDiets = (diet) => {
   return {
     type: ORDER_DIETS,
     payload: diet,
+  };
+};
+
+export const originData = (data) => {
+  return {
+    type: ORIGIN_DATA,
+    payload: data,
   };
 };

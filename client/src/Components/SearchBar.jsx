@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchRec, getDiets, orderDiets } from "../Redux/actions";
+import { searchRec, getDiets, orderDiets, originData } from "../Redux/actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,11 @@ const SearchBar = () => {
 
   const handleChangeDiets = (event) => {
     const diet = event.target.value;
-    dispatch(orderDiets(diet));
+    if (diet !== "all" && diet !== "api" && diet !== "create") {
+      dispatch(orderDiets(diet));
+    } else {
+      dispatch(originData(diet));
+    }
   };
 
   return (
@@ -39,8 +43,19 @@ const SearchBar = () => {
           </option>
         ))}
       </select>
-
-      <button>Filtart por API - BDD</button>
+      <label htmlFor="selecBus">Selecciona tu busqueda</label>
+      <select name="selectBus" onChange={handleChangeDiets}>
+        <option></option>
+        <option value="all" >
+          All
+        </option>
+        <option value="api" >
+          Api
+        </option>
+        <option value="create" >
+          Creados
+        </option>
+      </select>
 
       <button>Ordenar A - Z</button>
       <button>Ordenar Z - A</button>
