@@ -8,7 +8,8 @@ import {
   SEARCH_REC_ID,
   GET_DIETS,
   ORDER_DIETS,
-  ORIGIN_DATA
+  ORIGIN_API,
+  ORIGIN_CREATE
 } from "./actionsType";
 
 const initialState = {
@@ -61,18 +62,24 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         recipes: filterDiets(state.recipes, payload),
       };
-    
-    case ORIGIN_DATA:
-      return {
-        ...state,
-        recipes: searchData(state.recipes, payload)
-      }
 
     case GET_DIETS:
       return {
         ...state,
         diets: payload,
       };
+    
+    case ORIGIN_API: 
+      return {
+        ...state,
+        recipes: searchData(state.recipes, payload)
+      }
+    
+    case ORIGIN_CREATE:
+      return {
+        ...state,
+        recipes: searchData(state.recipes, payload)
+      }
 
     default:
       return {

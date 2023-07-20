@@ -8,7 +8,8 @@ import {
   SEARCH_REC_ID,
   GET_DIETS,
   ORDER_DIETS,
-  ORIGIN_DATA,
+  ORIGIN_API,
+  ORIGIN_CREATE
 } from "./actionsType";
 import { newObjAddRec } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
@@ -95,9 +96,16 @@ export const orderDiets = (diet) => {
   };
 };
 
-export const originData = (data) => {
+export const originApi = (data) => {
   return {
-    type: ORIGIN_DATA,
-    payload: data,
-  };
+    type: ORIGIN_API,
+    payload: data
+  }
 };
+
+export const originCreate = (data) => {
+  return {
+    type: ORIGIN_CREATE,
+    payload: data
+  }
+}
