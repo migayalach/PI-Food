@@ -22,10 +22,9 @@ import Favorites from "./Components/Favorites";
 import { getRecipes } from "./Redux/actions";
 
 const App = ({ removeFav }) => {
-  const [card, setCard] = useState(0);
   const location = useLocation();
   const [characters, setCharacters] = useState([]);
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRecipes());
@@ -55,7 +54,6 @@ const App = ({ removeFav }) => {
         <Route path="/detail/:id" component={Detail} />
         <Route path="/:id" component={Error} />
         <Route path="/" component={Landing} />
-
       </Switch>
     </div>
   );

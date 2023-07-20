@@ -7,6 +7,7 @@ import {
   SEARCH_RECIPE,
   SEARCH_REC_ID,
   GET_DIETS,
+  ORDER_DIETS,
 } from "./actionsType";
 import { newObjAddRec } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
@@ -83,5 +84,12 @@ export const getDiets = () => {
       type: GET_DIETS,
       payload: responseApi,
     });
+  };
+};
+
+export const orderDiets = (diet) => {
+  return {
+    type: ORDER_DIETS,
+    payload: diet,
   };
 };

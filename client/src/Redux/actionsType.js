@@ -5,3 +5,4 @@ export const ADD_RECIPE = "ADD_RECIPE";
 export const SEARCH_RECIPE = "SEARCH_RECIPE";
 export const SEARCH_REC_ID = "SEARCH_REC_ID";
 export const GET_DIETS = "GET_DIETS";
+export const ORDER_DIETS = "ORDER_DIETS";

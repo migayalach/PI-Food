@@ -1,3 +1,4 @@
+import { filterDiets } from "../Utils/reducerFun";
 import {
   ADD_FAV,
   REMOVE_FAV,
@@ -6,6 +7,7 @@ import {
   SEARCH_RECIPE,
   SEARCH_REC_ID,
   GET_DIETS,
+  ORDER_DIETS,
 } from "./actionsType";
 
 const initialState = {
@@ -51,6 +53,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: state.myFavorites.filter(({ id }) => id !== data),
+      };
+
+    case ORDER_DIETS:
+      return {
+        ...state,
+        recipes: filterDiets(state.recipes, payload),
       };
 
     case GET_DIETS:
