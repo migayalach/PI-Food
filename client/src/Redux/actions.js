@@ -5,9 +5,12 @@ import {
   GET_RECIPES,
   ADD_RECIPE,
   SEARCH_RECIPE,
+  SEARCH_REC_ID,
+  GET_DIETS,
 } from "./actionsType";
-
+import { newObjAddRec } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
+const URL_DIETS = `http://localhost:3001/diets`;
 
 export const addFav = (recipe) => {
   return {
@@ -36,22 +39,9 @@ export const getRecipes = () => {
 
 export const addRecipe = (recipe) => {
   return async function (dispatch) {
-    let obj = {};
-    for (let i in recipe) {
-      obj = {
-        nombre: recipe.nombre,
-        imagen: recipe.imagen,
-        resumen: recipe.resumen,
-        nivel: recipe.nivelComida,
-        pasoApaso: recipe.pasoApaso,
-        dieta: recipe.dietas,
-      };
-    }
+    const obj = newObjAddRec(recipe);
     try {
-      const createRecipe = await axios.post(
-        `http://localhost:3001/recipes`,
-        obj
-      );
+      const createRecipe = await axios.post(URL, obj);
       const newRecipe = createRecipe.data;
       dispatch({
         type: ADD_RECIPE,
@@ -70,6 +60,28 @@ export const searchRec = (recipe) => {
     dispatch({
       type: SEARCH_RECIPE,
       payload: recipeData,
+    });
+  };
+};
+
+export const searchRecId = (id) => {
+  return async function (dispatch) {
+    const response = await axios.get(`${URL}/${id}`);
+    const recipe = response.data;
+    dispatch({
+      type: SEARCH_REC_ID,
+      payload: recipe,
+    });
+  };
+};
+
+export const getDiets = () => {
+  return async function (dispatch) {
+    const dietsApi = await axios.get(`${URL_DIETS}`);
+    const responseApi = dietsApi.data;
+    dispatch({
+      type: GET_DIETS,
+      payload: responseApi,
     });
   };
 };

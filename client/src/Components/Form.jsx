@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import validation from "../Utils/validation";
-import { useDispatch } from "react-redux";
-import { addRecipe } from "../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addRecipe, getDiets } from "../Redux/actions";
 
 const Form = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDiets());
+  }, []);
+
+  const resDiets = useSelector((diet) => diet.diets);
+
   const [data, setData] = useState({
     nombre: "",
     resumen: "",
@@ -22,7 +28,7 @@ const Form = () => {
   const handleChange = (event) => {
     if (event.target.name === "dieta") {
       let aux = event.target.value;
-      if (aux.length !== 0) {
+      if (aux.length > 0) {
         if (!data.dietas.includes(aux)) {
           setData({
             ...data,
@@ -51,6 +57,7 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addRecipe(data));
+    window.location.reload();
   };
 
   // const delEspacios = (str, name) => {
@@ -130,23 +137,16 @@ const Form = () => {
         <br />
         <select name="dieta" onChange={handleChange}>
           <option></option>
-          <option value="verduras">Verduras</option>
-          <option value="frutas">Frutas</option>
-          <option value="masas">Masas</option>
-          <option value="cremas">Cremas</option>
-          <option value="liquidos">Liquido</option>
-          <option value="carneBlanca">Carne blanca</option>
-          <option value="carneRoja">Carne roja</option>
+          {resDiets.map(({ id, name }) => (
+            <option key={id} value={data.name} onChange={handleChange}>
+              {name}
+            </option>
+          ))}
         </select>
         {data.dietas.length > 0 ? <p>{data.dietas}</p> : <p>{errors.dietas}</p>}
         <br />
         <br />
-        {/* {console.log(Object.entries(errors).length === 0)} */}
-        {/* {Object.entries(errors).length === 0 ? ( */}
-          <button>Submit</button>
-        {/* ) : ( */}
-          <p>hay errores</p>
-        {/* )} */}
+        <button>Submit</button>
       </form>
     </div>
   );

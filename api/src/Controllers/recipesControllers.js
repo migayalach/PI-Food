@@ -9,7 +9,7 @@ const {
 } = require("../Utils/recipeUtils");
 const axios = require("axios");
 const { API_KEY } = process.env;
-const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=20&addRecipeInformation=true`;
+const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
 
 const createRecipes = async (
   nombre,
@@ -32,7 +32,7 @@ const createRecipes = async (
         name: diet,
       },
     });
-    await recipe.setDiets(dietRecord);
+    await recipe.addDiets(dietRecord);
   }
   return resCreateRecipe(recipe, diet);
 };

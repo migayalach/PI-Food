@@ -1,4 +1,5 @@
 const validation = (data) => {
+  console.log(data.dietas.length);
   const errors = {};
 
   // NOMBRE
@@ -73,7 +74,7 @@ const validation = (data) => {
   }
 
   // DIETA
-  if (data.dietas.length < 1) {
+  if (data.dietas.length === 0) {
     errors.dietas = `Por favor seleccione minimamente una dieta`;
   }
 

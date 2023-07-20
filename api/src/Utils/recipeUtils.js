@@ -5,11 +5,14 @@ const newArrRecipe = (arr) =>
       title: data.title,
       image: data.image,
       summary: data.summary,
+      instructions: data.instructions,
+      healthScore: data.healthScore,
       diets: data.diets,
     };
   });
 
 const responseBdd = (arr) => {
+  console.log(arr);
   const aux = arr.map(
     ({ id, name, image, resumenPlato, nivel, pasoApaso, created, diets }) => {
       const diet = diets.map(({ name }) => name);
@@ -17,9 +20,9 @@ const responseBdd = (arr) => {
         id,
         name,
         image,
-        resumenPlato,
-        nivel,
-        pasoApaso,
+        "summary":resumenPlato,
+        "healthScore":nivel,
+        "instructions":pasoApaso,
         created,
         diets: diet,
       };

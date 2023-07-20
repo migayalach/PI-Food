@@ -42,7 +42,6 @@ const Card = ({
       )}
 
       <button onClick={() => onClose(id)}>X</button>
-
       <Link to={`/detail/${id}`}>
         <p>{title}</p>
       </Link>

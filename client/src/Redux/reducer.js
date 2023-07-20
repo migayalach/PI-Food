@@ -4,11 +4,14 @@ import {
   GET_RECIPES,
   ADD_RECIPE,
   SEARCH_RECIPE,
+  SEARCH_REC_ID,
+  GET_DIETS,
 } from "./actionsType";
 
 const initialState = {
   myFavorites: [],
   recipes: [],
+  diets: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -31,6 +34,12 @@ const reducer = (state = initialState, { type, payload }) => {
         recipes: payload,
       };
 
+    case SEARCH_REC_ID:
+      return {
+        ...state,
+        recipes: payload,
+      };
+
     case ADD_FAV:
       return {
         ...state,
@@ -38,9 +47,16 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_FAV:
+      const data = isNaN(payload) ? payload : +payload;
       return {
         ...state,
-        myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
+        myFavorites: state.myFavorites.filter(({ id }) => id !== data),
+      };
+
+    case GET_DIETS:
+      return {
+        ...state,
+        diets: payload,
       };
 
     default:
