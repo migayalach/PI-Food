@@ -1,4 +1,9 @@
-import { filterDiets, searchData } from "../Utils/reducerFun";
+import {
+  filterDiets,
+  searchData,
+  orderScore,
+  orderAscDes,
+} from "../Utils/reducerFun";
 import {
   ADD_FAV,
   REMOVE_FAV,
@@ -9,7 +14,10 @@ import {
   GET_DIETS,
   ORDER_DIETS,
   ORIGIN_API,
-  ORIGIN_CREATE
+  ORIGIN_CREATE,
+  ORDER_SCORE,
+  ORDER_AZ,
+  ORDER_ZA,
 } from "./actionsType";
 
 const initialState = {
@@ -68,18 +76,36 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         diets: payload,
       };
-    
-    case ORIGIN_API: 
+
+    case ORIGIN_API:
       return {
         ...state,
-        recipes: searchData(state.recipes, payload)
-      }
-    
+        recipes: searchData(state.recipes, payload),
+      };
+
     case ORIGIN_CREATE:
       return {
         ...state,
-        recipes: searchData(state.recipes, payload)
-      }
+        recipes: searchData(state.recipes, payload),
+      };
+
+    case ORDER_SCORE:
+      return {
+        ...state,
+        recipes: orderScore(state.recipes),
+      };
+
+    case ORDER_AZ:
+      return {
+        ...state,
+        recipes: orderAscDes(state.recipes, payload),
+      };
+
+    case ORDER_ZA:
+      return {
+        ...state,
+        recipes: orderAscDes(state.recipes, payload),
+      };
 
     default:
       return {

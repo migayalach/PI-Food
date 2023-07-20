@@ -8,3 +8,7 @@ export const GET_DIETS = "GET_DIETS";
 export const ORDER_DIETS = "ORDER_DIETS";
 export const ORIGIN_API = "ORIGIN_API";
 export const ORIGIN_CREATE = "ORIGIN_CREATE";
+export const ORDER_SCORE = "ORDER_SCORE";
+export const ORDER_AZ = "ORDER_AZ";
+export const ORDER_ZA = "ORDER_ZA";
+

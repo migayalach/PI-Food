@@ -9,7 +9,10 @@ import {
   GET_DIETS,
   ORDER_DIETS,
   ORIGIN_API,
-  ORIGIN_CREATE
+  ORIGIN_CREATE,
+  ORDER_SCORE,
+  ORDER_AZ,
+  ORDER_ZA,
 } from "./actionsType";
 import { newObjAddRec } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
@@ -99,13 +102,33 @@ export const orderDiets = (diet) => {
 export const originApi = (data) => {
   return {
     type: ORIGIN_API,
-    payload: data
-  }
+    payload: data,
+  };
 };
 
 export const originCreate = (data) => {
   return {
     type: ORIGIN_CREATE,
-    payload: data
-  }
-}
+    payload: data,
+  };
+};
+
+export const orderScore = () => {
+  return {
+    type: ORDER_SCORE,
+  };
+};
+
+export const orderAZ = (data) => {
+  return {
+    type: ORDER_AZ,
+    payload: data,
+  };
+};
+
+export const orderZA = (data) => {
+  return {
+    type: ORDER_ZA,
+    payload: data,
+  };
+};

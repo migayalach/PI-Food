@@ -7,6 +7,9 @@ import {
   originApi,
   originCreate,
   getRecipes,
+  orderScore,
+  orderAZ,
+  orderZA,
 } from "../Redux/actions";
 
 const SearchBar = () => {
@@ -41,6 +44,19 @@ const SearchBar = () => {
     }
   };
 
+  const handleChangeOrder = (event) => {
+    const order = event.target.value;
+    if (order === "healthScore") {
+      dispatch(orderScore());
+    } else if (order === "orderAZ") {
+      dispatch(orderAZ(order));
+    } else if (order === "orderZA") {
+      dispatch(orderZA(order));
+    } else {
+      dispatch(getDiets());
+    }
+  };
+
   return (
     <div>
       <input type="seach" onChange={handleChange} value={recipe} />
@@ -62,9 +78,13 @@ const SearchBar = () => {
         <option value="create">Creados</option>
       </select>
 
-      <button>Ordenar A - Z</button>
-      <button>Ordenar Z - A</button>
-      <button>Health source</button>
+      <label htmlFor="ordenar">Ordenar</label>
+      <select name="ordenar" onChange={handleChangeOrder}>
+        <option></option>
+        <option value="orderAZ">Ordenar A - Z</option>
+        <option value="orderZA">Ordenar Z - A</option>
+        <option value="healthScore">Health source</option>
+      </select>
     </div>
   );
 };

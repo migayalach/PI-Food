@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import Pagination from "./Pagination";
@@ -16,16 +16,16 @@ const CardsContainer = ({ onClose }) => {
   const indexOfLastItem = currentPage * ItemsPerPage;
   const indexOfFirstItem = indexOfLastItem - ItemsPerPage;
   const currentRecipes = recipe.slice(indexOfFirstItem, indexOfLastItem);
-  
+
   return (
     <div>
-      {currentRecipes.map(({ id, title, image, summary, diets }) => (
+      {currentRecipes.map(({ id, title, image, healthScore, diets }) => (
         <Card
           key={id}
           id={id}
           title={title}
           image={image}
-          // summary={summary}
+           summary={healthScore}
           diets={diets}
           onClose={onClose}
         />
