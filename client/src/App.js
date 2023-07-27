@@ -1,8 +1,7 @@
-import axios from "axios";
 // HOOK'S
 import { useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
-import { addFav, removeFav } from "./Redux/actions";
+import { removeFav } from "./Redux/actions";
 import { connect, useDispatch } from "react-redux";
 
 // CSS

@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 const ItemsPerPage = 9;
 
 const CardsContainer = ({ onClose }) => {
-  const recipe = useSelector((state) => state.recipes);
+  const recipe = useSelector((state) => state.aux);
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (pageNumber) => {
@@ -16,6 +16,9 @@ const CardsContainer = ({ onClose }) => {
   const indexOfLastItem = currentPage * ItemsPerPage;
   const indexOfFirstItem = indexOfLastItem - ItemsPerPage;
   const currentRecipes = recipe.slice(indexOfFirstItem, indexOfLastItem);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [recipe]);
 
   return (
     <div>
@@ -25,7 +28,7 @@ const CardsContainer = ({ onClose }) => {
           id={id}
           title={title}
           image={image}
-           summary={healthScore}
+          summary={healthScore}
           diets={diets}
           onClose={onClose}
         />

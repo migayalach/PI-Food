@@ -24,6 +24,7 @@ const initialState = {
   myFavorites: [],
   recipes: [],
   diets: [],
+  aux: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -32,6 +33,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         recipes: payload,
+        aux: payload
       };
 
     case ADD_RECIPE:
@@ -68,7 +70,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORDER_DIETS:
       return {
         ...state,
-        recipes: filterDiets(state.recipes, payload),
+        aux: filterDiets(state.recipes, payload),
       };
 
     case GET_DIETS:
