@@ -82,25 +82,25 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORIGIN_API:
       return {
         ...state,
-        recipes: searchData(state.recipes, payload),
+        aux: searchData(state.recipes, payload),
       };
 
     case ORIGIN_CREATE:
       return {
         ...state,
-        recipes: searchData(state.recipes, payload),
+        aux: searchData(state.recipes, payload),
       };
 
     case ORDER_SCORE:
       return {
         ...state,
-        recipes: orderScore(state.recipes),
+        aux: orderScore(state.recipes),
       };
 
     case ORDER_AZ:
       return {
         ...state,
-        recipes: orderAscDes(state.recipes, payload),
+        aux: orderAscDes(state.recipes, payload),
       };
 
     case ORDER_ZA:

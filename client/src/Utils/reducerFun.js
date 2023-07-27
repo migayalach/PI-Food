@@ -15,7 +15,8 @@ const searchData = (arr, data) => {
   if (data === "api") {
     return arr.filter(({ id }) => isNaN(id) === false);
   } else if (data === "create") {
-    return arr.filter(({ id }) => isNaN(id) === true);
+    let aux = arr.filter(({ id }) => isNaN(id) === true);
+    return aux;
   } else {
     return arr;
   }
@@ -61,10 +62,10 @@ const orderAscDes = (arr, ope) => {
   if (ope === "orderAZ") {
     return order(arr);
   }
-  else if(ope === "orderZA"){
-    let res = order(arr);
-    return res.reverse();
-  }
+  // else if(ope === "orderZA"){
+  //   let res = order(arr);
+  //   return res.reverse();
+  // }
 };
 
 

@@ -80,7 +80,7 @@ const SearchBar = () => {
 
       <label htmlFor="ordenar">Ordenar</label>
       <select name="ordenar" onChange={handleChangeOrder}>
-        <option value=""></option>
+        <option></option>
         <option value="orderAZ">Ordenar A - Z</option>
         <option value="orderZA">Ordenar Z - A</option>
         <option value="healthScore">Health source</option>
