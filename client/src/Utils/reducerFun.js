@@ -69,4 +69,4 @@ const orderAscDes = (arr, ope) => {
 };
 
 
-module.exports = { filterDiets, searchData, orderScore, orderAscDes };
+module.exports = { filterDiets, searchData, orderAscDes };

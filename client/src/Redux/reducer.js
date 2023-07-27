@@ -24,7 +24,8 @@ const initialState = {
   myFavorites: [],
   recipes: [],
   diets: [],
-  aux: []
+  aux: [],
+  order: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -33,7 +34,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         recipes: payload,
-        aux: payload
+        aux: payload,
       };
 
     case ADD_RECIPE:
@@ -94,8 +95,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORDER_SCORE:
       return {
         ...state,
-        aux: orderScore(state.recipes),
+        aux: payload,
       };
+    // return {
+    //   ...state,
+    //   aux: orderScore(state.recipes)
+    // };
 
     case ORDER_AZ:
       return {

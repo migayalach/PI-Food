@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   ADD_FAV,
   REMOVE_FAV,
@@ -14,7 +15,7 @@ import {
   ORDER_AZ,
   ORDER_ZA,
 } from "./actionsType";
-import { newObjAddRec } from "../Utils/actionFun";
+import { newObjAddRec, orderScores } from "../Utils/actionFun";
 const URL = `http://localhost:3001/recipes`;
 const URL_DIETS = `http://localhost:3001/diets`;
 
@@ -113,9 +114,16 @@ export const originCreate = (data) => {
   };
 };
 
+
 export const orderScore = () => {
-  return {
-    type: ORDER_SCORE,
+  return async function (dispatch) {
+    const dietsApi = await axios.get(`${URL}`);
+    const responseApi = dietsApi.data;
+
+    dispatch({
+      type: ORDER_SCORE,
+      payload: orderScores(responseApi),
+    });
   };
 };
 

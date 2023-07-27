@@ -13,4 +13,18 @@ const newObjAddRec = (recipe) => {
   return obj;
 };
 
-module.exports = { newObjAddRec };
+const orderScores = (array) => {
+  for (let i = 0; i < array.length - 1; i++) {
+    let aux = i;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j].healthScore > array[aux].healthScore) aux = j;
+    }
+    let temp = array[aux];
+    array[aux] = array[i];
+    array[i] = temp;
+  }
+  return array;
+};
+
+
+module.exports = { newObjAddRec, orderScores };

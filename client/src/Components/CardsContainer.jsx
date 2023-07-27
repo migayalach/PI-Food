@@ -6,8 +6,7 @@ import Pagination from "./Pagination";
 const ItemsPerPage = 9;
 
 const CardsContainer = ({ onClose }) => {
-  const recipe = useSelector((state) => state.aux);
-  console.log(recipe);
+  const recipe = useSelector((state) => state.aux || state.order);
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (pageNumber) => {
