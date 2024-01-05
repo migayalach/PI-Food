@@ -59,9 +59,9 @@ const valor = (text) => {
 };
 
 const orderAscDes = (arr, ope) => {
-  if (ope === "orderAZ") {
-    return order(arr);
-  }
+  // if (ope === "orderAZ") {
+  //   return order(arr);
+  // }
   // else if(ope === "orderZA"){
   //   let res = order(arr);
   //   return res.reverse();

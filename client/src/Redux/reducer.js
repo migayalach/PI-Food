@@ -97,10 +97,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         aux: payload,
       };
-    // return {
-    //   ...state,
-    //   aux: orderScore(state.recipes)
-    // };
 
     case ORDER_AZ:
       return {

@@ -8,7 +8,7 @@ const ItemsPerPage = 9;
 const CardsContainer = ({ onClose }) => {
   const recipe = useSelector((state) => state.aux || state.order);
   const [currentPage, setCurrentPage] = useState(1);
-
+  console.log(recipe);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

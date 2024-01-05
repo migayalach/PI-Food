@@ -20,6 +20,7 @@
     font-size: 34px;
     opacity: .8;
     transition: background-color 0.3s ease;
+    user-select: none;
   }
   
   .btn-login:hover {
@@ -34,9 +35,6 @@
     outline: none;
   }
   
-  
-  
-
 .img-fondo {
   opacity: 0.8;
   position: fixed;
@@ -45,4 +43,12 @@
   width: 100vw;
   height: 100vh;
   z-index: -1;
+}
+
+
+@media screen and (max-width:600px){
+  .img-fondo {
+    background-size: cover;
+    background-position: center;
+  }
 }

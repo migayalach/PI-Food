@@ -50,7 +50,8 @@ const SearchBar = () => {
       dispatch(orderScore());
     } else if (order === "orderAZ") {
       dispatch(orderAZ(order));
-    } else if (order === "orderZA") {
+    } 
+    else if (order === "orderZA") {
       dispatch(orderZA(order));
     } else {
       dispatch(getDiets());

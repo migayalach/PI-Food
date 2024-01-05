@@ -114,7 +114,6 @@ export const originCreate = (data) => {
   };
 };
 
-
 export const orderScore = () => {
   return async function (dispatch) {
     const dietsApi = await axios.get(`${URL}`);
