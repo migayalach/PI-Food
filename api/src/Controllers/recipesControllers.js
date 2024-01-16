@@ -18,7 +18,7 @@ const createRecipes = async (
   nivel,
   pasoApaso,
   diet
-) => {
+  ) => {
   const recipe = await Recipe.create({
     name: nombre,
     image: imagen,
@@ -41,7 +41,7 @@ const buscarRecipe = async (name) => {
   const apiRecipes = (await axios.get(`${URL}`)).data.results;
   const apiRecipe = newArrRecipe(apiRecipes);
   const resultApi = searchApi(name, apiRecipe);
-
+  
   const dataBaseRecipe = await Recipe.findAll({
     where: {
       name: {
