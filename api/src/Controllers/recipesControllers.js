@@ -62,13 +62,14 @@ const buscarRecipe = async (name) => {
 
 const mostrarAllRecipe = async () => {
   const apiRecipes = (await axios.get(`${URL}`)).data.results;
-  const data = await Recipe.findAll({
-    include: [{ model: Diets }],
-  });
-  const dataRes = dataClear(data);
+  console.log(apiRecipes);
+  // const data = await Recipe.findAll({
+  //   include: [{ model: Diets }],
+  // });
+  // const dataRes = dataClear(data);
 
-  const apiRecipe = newArrRecipe(apiRecipes);
-  return [...dataRes, ...apiRecipe];
+  // const apiRecipe = newArrRecipe(apiRecipes);
+  // return [...dataRes, ...apiRecipe];
 };
 
 const getRecipeData = async (typeData, data) => {
