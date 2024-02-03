@@ -17,12 +17,12 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
-const PORT = 3001;
-// Syncing all the models at once.
+const server = require("./src/app.js");
+const { conn } = require("./src/db.js");
+const { PORT } = process.env;
+
 conn.sync({ alter: true }).then(() => {
   server.listen(PORT, () => {
-    console.log(`Servidor levantado con exito en el puerto: ${PORT}`); // eslint-disable-line no-console
+    console.log(`Servidor levantado con exito en el puerto: ${PORT}`);
   });
 });
