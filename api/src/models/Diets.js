@@ -3,12 +3,13 @@ module.exports = (sequelize) => {
   sequelize.define(
     "diets",
     {
-      id: {
+      idDiet: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
-      name: {
+      nameDiet: {
         type: DataTypes.STRING,
         allowNull: false,
       },
