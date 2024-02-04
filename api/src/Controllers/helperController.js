@@ -5,6 +5,10 @@ async function existDiets() {
   return await Diets.findAll();
 }
 
+async function existRecipe(idRecipe) {
+  return await Recipe.findOne({ where: { idRecipe } });
+}
+
 async function dietsPrommise(diets) {
   const diet = await Promise.all(
     diets.map((nameDiet) =>
@@ -23,8 +27,14 @@ async function addRecipeDiets(idRecipe, diets) {
   return `Receta creada con exito`;
 }
 
+async function deleteDietsRecipe(idRecipe) {
+  return await DietsRecipe.destroy({ where: { idRecipe } });
+}
+
 module.exports = {
   existDiets,
+  existRecipe,
   dietsPrommise,
   addRecipeDiets,
+  deleteDietsRecipe
 };
