@@ -20,9 +20,9 @@ const responseBdd = (arr) => {
         id,
         name,
         image,
-        "summary":resumenPlato,
-        "healthScore":nivel,
-        "instructions":pasoApaso,
+        summary: resumenPlato,
+        healthScore: nivel,
+        instructions: pasoApaso,
         created,
         diets: diet,
       };
@@ -50,9 +50,35 @@ const dataClear = (data) => {
   return aux;
 };
 
+function clearDataRecipe(dataRecipe) {
+  return dataRecipe.map(
+    ({
+      idRecipe,
+      nameRecipe,
+      imageRecipe,
+      summary,
+      healthScore,
+      created,
+      diets,
+    }) => ({
+      idRecipe,
+      nameRecipe,
+      imageRecipe,
+      summary,
+      healthScore,
+      created,
+      diets: diets.map(({ idDiet, nameDiet }) => ({
+        idDiet,
+        nameDiet,
+      })),
+    })
+  );
+}
+
 module.exports = {
   newArrRecipe,
   responseBdd,
   searchApi,
   dataClear,
+  clearDataRecipe,
 };
