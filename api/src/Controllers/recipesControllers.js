@@ -1,6 +1,8 @@
-const { Recipe, Diets } = require("../db");
+const { Recipe, Diets, DietsRecipe } = require("../db");
 const { Op } = require("sequelize");
+const { addRecipeDiets } = require("./helperController");
 const { resCreateRecipe } = require("../Utils/dietsUtils");
+const { clearDataRecipe } = require("../Utils/recipeUtils");
 const {
   newArrRecipe,
   responseBdd,
@@ -12,36 +14,28 @@ const { API_KEY } = process.env;
 const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
 
 const createRecipes = async (
-  nombre,
-  imagen,
-  resumen,
-  nivel,
-  pasoApaso,
-  diet
-  ) => {
-  const recipe = await Recipe.create({
-    name: nombre,
-    image: imagen,
-    resumenPlato: resumen,
-    nivel,
-    pasoApaso,
+  nameRecipe,
+  imageRecipe,
+  summary,
+  healthScore,
+  created,
+  diets
+) => {
+  const { idRecipe } = await Recipe.create({
+    nameRecipe,
+    imageRecipe,
+    summary,
+    created,
+    healthScore,
   });
-  if (diet && diet.length > 0) {
-    const dietRecord = await Diets.findAll({
-      where: {
-        name: diet,
-      },
-    });
-    await recipe.addDiets(dietRecord);
-  }
-  return resCreateRecipe(recipe, diet);
+  return await addRecipeDiets(idRecipe, diets);
 };
 
 const buscarRecipe = async (name) => {
   const apiRecipes = (await axios.get(`${URL}`)).data.results;
   const apiRecipe = newArrRecipe(apiRecipes);
   const resultApi = searchApi(name, apiRecipe);
-  
+
   const dataBaseRecipe = await Recipe.findAll({
     where: {
       name: {
@@ -61,34 +55,32 @@ const buscarRecipe = async (name) => {
 };
 
 const mostrarAllRecipe = async () => {
-  const apiRecipes = (await axios.get(`${URL}`)).data.results;
-  console.log(apiRecipes);
-  // const data = await Recipe.findAll({
-  //   include: [{ model: Diets }],
-  // });
-  // const dataRes = dataClear(data);
-
-  // const apiRecipe = newArrRecipe(apiRecipes);
-  // return [...dataRes, ...apiRecipe];
+  const dataRecipe = await Recipe.findAll({
+    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+  });
+  return clearDataRecipe(dataRecipe);
 };
 
-const getRecipeData = async (typeData, data) => {
-  const response =
-    typeData === "api"
-      ? (
-          await axios.get(
-            `https://api.spoonacular.com/recipes/${data}/information?apiKey=${API_KEY}`
-          )
-        ).data
-      : await Recipe.findByPk(data, {
-          include: {
-            model: Diets,
-            attributes: ["name"],
-          },
-        });
+const getRecipeData = async (idRecipe) => {
+  const recipeId = await Recipe.findOne({
+    where: { idRecipe },
+    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+  });
+  return clearDataRecipe([recipeId]);
+};
 
-  if (typeData === "bdd") return responseBdd([response]);
-  return newArrRecipe([response]);
+const putRecipeController = () => {
+  const {
+    idRecipe,
+    nameRecipe,
+    imageRecipe,
+    summary,
+    healthScore,
+    created,
+    diets,
+  } = {
+    
+  };
 };
 
 module.exports = {
@@ -96,4 +88,5 @@ module.exports = {
   buscarRecipe,
   mostrarAllRecipe,
   getRecipeData,
+  putRecipeController,
 };
