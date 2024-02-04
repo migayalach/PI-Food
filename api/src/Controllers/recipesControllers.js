@@ -1,6 +1,10 @@
 const { Recipe, Diets, DietsRecipe } = require("../db");
 const { Op } = require("sequelize");
-const { addRecipeDiets } = require("./helperController");
+const {
+  addRecipeDiets,
+  existRecipe,
+  deleteDietsRecipe,
+} = require("./helperController");
 const { resCreateRecipe } = require("../Utils/dietsUtils");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
 const {
@@ -28,6 +32,7 @@ const createRecipes = async (
     created,
     healthScore,
   });
+
   return await addRecipeDiets(idRecipe, diets);
 };
 
@@ -69,18 +74,31 @@ const getRecipeData = async (idRecipe) => {
   return clearDataRecipe([recipeId]);
 };
 
-const putRecipeController = () => {
-  const {
-    idRecipe,
-    nameRecipe,
-    imageRecipe,
-    summary,
-    healthScore,
-    created,
-    diets,
-  } = {
-    
-  };
+const putRecipeController = async (
+  idRecipe,
+  nameRecipe,
+  imageRecipe,
+  summary,
+  healthScore,
+  created,
+  diets
+) => {
+  if (!(await existRecipe(idRecipe))) {
+    throw Error`La receta que usted desea modificar no existe`;
+  }
+  if (!created) {
+    throw Error`No tiene permisos para modificar esta receta`;
+  }
+  // EDITAR RECETAS
+  await Recipe.update(
+    { nameRecipe, imageRecipe, summary, healthScore },
+    { where: { idRecipe } }
+  );
+  // ELIMINAR LOS DATOS DE LA TABLA INTERMEDIA
+  await deleteDietsRecipe(idRecipe);
+  // AGREGAR DATOS A LA TABLA INTERMEDIA
+  await addRecipeDiets(idRecipe, diets);
+  return ":D";
 };
 
 module.exports = {
