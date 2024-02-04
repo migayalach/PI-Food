@@ -12,5 +12,3 @@ const getDiets = async (request, response) => {
 };
 
 module.exports = { getDiets };
-
-// https://api.spoonacular.com/recipes/complexSearch?apiKey=ad4a2ed956bf4120810ff3d859380cbf&addRecipeInformation=true
