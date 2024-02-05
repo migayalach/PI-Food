@@ -43,6 +43,15 @@ async function duplicateImage(imageRecipe) {
   });
 }
 
+function paginateRecipes(){
+
+};
+
+function paginateDiets(){
+  
+};
+
+
 module.exports = {
   existDiets,
   existRecipe,
