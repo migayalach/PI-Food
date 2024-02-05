@@ -5,6 +5,7 @@ const {
   existRecipe,
   deleteDietsRecipe,
   duplicateName,
+  duplicateImage,
 } = require("./helperController");
 const { resCreateRecipe } = require("../Utils/dietsUtils");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
@@ -29,6 +30,10 @@ const createRecipes = async (
   if ((await duplicateName(nameRecipe)).length) {
     throw Error`Lo siento no puede haber dos recetas con el mismo nombre`;
   }
+  if ((await duplicateImage(imageRecipe)).length) {
+    throw Error`Lo siento no puede haber dos imagenes repetidas`;
+  }
+
   const { idRecipe } = await Recipe.create({
     nameRecipe,
     imageRecipe,
@@ -99,6 +104,9 @@ const putRecipeController = async (
   }
   if ((await duplicateName(nameRecipe)).length) {
     throw Error`Lo siento no puede haber dos recetas con el mismo nombre`;
+  }
+  if ((await duplicateImage(imageRecipe)).length) {
+    throw Error`Lo siento no puede haber dos imagenes repetidas`;
   }
   // EDITAR RECETAS
   await Recipe.update(
