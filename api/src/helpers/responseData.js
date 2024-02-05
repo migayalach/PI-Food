@@ -2,4 +2,13 @@ const responseDiet = () => {};
 
 const responseRecipe = () => {};
 
-module.exports = { responseDiet, responseRecipe };
+const responseDiets = () => {};
+
+const responseRecipes = () => {};
+
+module.exports = {
+  responseDiet,
+  responseRecipe,
+  responseDiets,
+  responseRecipes,
+};
