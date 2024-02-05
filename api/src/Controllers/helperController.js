@@ -31,10 +31,24 @@ async function deleteDietsRecipe(idRecipe) {
   return await DietsRecipe.destroy({ where: { idRecipe } });
 }
 
+async function duplicateName(nameRecipe) {
+  return await Recipe.findAll({
+    where: { nameRecipe: { [Op.iLike]: `%${nameRecipe}%` } },
+  });
+}
+
+async function duplicateImage(imageRecipe) {
+  return await Recipe.findAll({
+    where: { imageRecipe: { [Op.like]: `${imageRecipe}` } },
+  });
+}
+
 module.exports = {
   existDiets,
   existRecipe,
   dietsPrommise,
   addRecipeDiets,
-  deleteDietsRecipe
+  deleteDietsRecipe,
+  duplicateName,
+  duplicateImage,
 };
