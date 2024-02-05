@@ -4,6 +4,7 @@ const {
   addRecipeDiets,
   existRecipe,
   deleteDietsRecipe,
+  duplicateName,
 } = require("./helperController");
 const { resCreateRecipe } = require("../Utils/dietsUtils");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
@@ -25,6 +26,9 @@ const createRecipes = async (
   created,
   diets
 ) => {
+  if ((await duplicateName(nameRecipe)).length) {
+    throw Error`Lo siento no puede haber dos recetas con el mismo nombre`;
+  }
   const { idRecipe } = await Recipe.create({
     nameRecipe,
     imageRecipe,
@@ -33,7 +37,11 @@ const createRecipes = async (
     healthScore,
   });
 
-  return await addRecipeDiets(idRecipe, diets);
+  if (idRecipe) {
+    return await addRecipeDiets(idRecipe, diets);
+  }
+
+  throw Error`No se pudo crear la receta`;
 };
 
 const buscarRecipe = async (name) => {
@@ -89,6 +97,9 @@ const putRecipeController = async (
   if (!created) {
     throw Error`No tiene permisos para modificar esta receta`;
   }
+  if ((await duplicateName(nameRecipe)).length) {
+    throw Error`Lo siento no puede haber dos recetas con el mismo nombre`;
+  }
   // EDITAR RECETAS
   await Recipe.update(
     { nameRecipe, imageRecipe, summary, healthScore },
@@ -98,7 +109,7 @@ const putRecipeController = async (
   await deleteDietsRecipe(idRecipe);
   // AGREGAR DATOS A LA TABLA INTERMEDIA
   await addRecipeDiets(idRecipe, diets);
-  return ":D";
+  return await getRecipeData(idRecipe);
 };
 
 module.exports = {
