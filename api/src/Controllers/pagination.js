@@ -1,20 +1,35 @@
-const axios = require("axios");
 const { URL } = process.env;
 let _dictionary = {};
 const _length = 20;
 
-function pagination() {
-  return {
-    next: "NEXT",
-    prev: "PREV",
-  };
+async function pagination(page, pages) {
+  if (page > pages) {
+    throw Error`Lo siento la pagina que busca no existe`;
+  }
+  if (page <= 1) {
+    return {
+      next: `${URL}/recipes?page=2`,
+      prev: null,
+    };
+  } else if (page < pages) {
+    return {
+      next: `${URL}/recipes?page=${+page + 1}`,
+      prev: `${URL}/recipes?page=${page - 1}`,
+    };
+  } else {
+    return {
+      next: null,
+      prev: `${URL}/recipes?page=${page - 1}`,
+    };
+  }
 }
 
-function responseInfo(count, page) {
-  const pag = pagination();
+async function responseInfo(count, page) {
+  const pages = Math.ceil(count / _length);
+  const pag = await pagination(page, pages);
   const obj = {
     count,
-    pages: Math.ceil(count / _length),
+    pages,
     next: pag.next,
     prev: pag.prev,
   };
@@ -38,18 +53,6 @@ function addDictionary(key, data) {
   };
   return _dictionary;
 }
-
-function arrayextract() {}
-
-async function detailInfo() {}
-
-// async function pagination() {
-//   const page = await axios.get(`${URL}/recipes?page=2`);
-//   return {
-//     next: page.data,
-//     prev: "ACA VA EL FILTRO",
-//   };
-// }
 
 module.exports = {
   pagination,
