@@ -6,6 +6,8 @@ const {
   deleteDietsRecipe,
   duplicateName,
   duplicateImage,
+  countData,
+  resesponseData,
 } = require("./helperController");
 const { resCreateRecipe } = require("../Utils/dietsUtils");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
@@ -15,10 +17,18 @@ const {
   searchApi,
   dataClear,
 } = require("../Utils/recipeUtils");
-const axios = require("axios");
-const { API_KEY } = process.env;
-const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
 
+// MOSTRAR TODAS LAS RECETAS
+const mostrarAllRecipe = async () => {
+  const dataRecipe = await Recipe.findAll({
+    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+  });
+  const results = clearDataRecipe(dataRecipe);
+  const count = await countData("recipes");
+  return await resesponseData(results, count);
+};
+
+// CREAR RECETAS
 const createRecipes = async (
   nameRecipe,
   imageRecipe,
@@ -49,36 +59,7 @@ const createRecipes = async (
   throw Error`No se pudo crear la receta`;
 };
 
-const buscarRecipe = async (name) => {
-  const apiRecipes = (await axios.get(`${URL}`)).data.results;
-  const apiRecipe = newArrRecipe(apiRecipes);
-  const resultApi = searchApi(name, apiRecipe);
-
-  const dataBaseRecipe = await Recipe.findAll({
-    where: {
-      name: {
-        [Op.iLike]: `%${name}%`,
-      },
-    },
-    include: {
-      model: Diets,
-      attributes: ["name"],
-    },
-  });
-
-  if (dataBaseRecipe.length === 0 && resultApi.length === 0)
-    throw Error(`No se ha encontrado la receta con esste nombre: ${name}`);
-  const dataBaseClear = responseBdd(dataBaseRecipe);
-  return [...dataBaseClear, ...resultApi];
-};
-
-const mostrarAllRecipe = async () => {
-  const dataRecipe = await Recipe.findAll({
-    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
-  });
-  return clearDataRecipe(dataRecipe);
-};
-
+// BUSQUEDA POR ID
 const getRecipeData = async (idRecipe) => {
   const recipeId = await Recipe.findOne({
     where: { idRecipe },
@@ -87,6 +68,7 @@ const getRecipeData = async (idRecipe) => {
   return clearDataRecipe([recipeId]);
 };
 
+// EDITAR RECETAS
 const putRecipeController = async (
   idRecipe,
   nameRecipe,
@@ -119,6 +101,14 @@ const putRecipeController = async (
   await addRecipeDiets(idRecipe, diets);
   return await getRecipeData(idRecipe);
 };
+
+// BUSCAR RECETAS
+function buscarRecipe(page) {
+  return page;
+}
+
+// ELIMINAR RECETAS
+const deleteRecipe = () => {};
 
 module.exports = {
   createRecipes,
