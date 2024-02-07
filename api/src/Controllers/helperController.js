@@ -56,8 +56,8 @@ async function countData(option) {
   }
 }
 
-async function resesponseData(data, count, page) {
-  const info = await responseInfo(count, page);
+function resesponseData(data, count, page) {
+  const info = responseInfo(count, page);
   const result = responseResult(data);
   return { info, result: result[page] };
 }

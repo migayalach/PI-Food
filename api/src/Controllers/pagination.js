@@ -2,7 +2,7 @@ const { URL } = process.env;
 let _dictionary = {};
 const _length = 20;
 
-async function pagination(page, pages) {
+function pagination(page, pages) {
   if (page > pages) {
     throw Error`Lo siento la pagina que busca no existe`;
   }
@@ -24,9 +24,9 @@ async function pagination(page, pages) {
   }
 }
 
-async function responseInfo(count, page) {
+function responseInfo(count, page) {
   const pages = Math.ceil(count / _length);
-  const pag = await pagination(page, pages);
+  const pag = pagination(page, pages);
   const obj = {
     count,
     pages,
