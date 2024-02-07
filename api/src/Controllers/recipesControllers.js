@@ -11,12 +11,16 @@ const {
 } = require("./helperController");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
 
-// MOSTRAR TODAS LAS RECETAS
-const mostrarAllRecipe = async () => {
-  const dataRecipe = await Recipe.findAll({
+async function recipesData() {
+  return await Recipe.findAll({
     include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
     order: [["idRecipe", "ASC"]],
   });
+}
+
+// MOSTRAR TODAS LAS RECETAS
+const mostrarAllRecipe = async () => {
+  const dataRecipe = await recipesData();
   const results = clearDataRecipe(dataRecipe);
   const count = await countData("recipes");
   return await resesponseData(results, count, (page = 1));
@@ -97,8 +101,12 @@ const putRecipeController = async (
 };
 
 // BUSCAR RECETAS
-function buscarRecipe(page) {
-  return page;
+async function buscarRecipe(page) {
+  if (page < 0) page = 1;
+  const dataRecipe = await recipesData();
+  const results = clearDataRecipe(dataRecipe);
+  const count = await countData("recipes");
+  return await resesponseData(results, count, page);
 }
 
 // ELIMINAR RECETAS
