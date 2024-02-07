@@ -29,9 +29,9 @@ const createRecipeHandler = async (request, response) => {
 
 // MUESTRA DATOS POR QUERY
 const getRecipesHandler = async (request, response) => {
-  const { name } = request.query;
+  const { page } = request.query;
   try {
-    const result = name ? await buscarRecipe(name) : await mostrarAllRecipe();
+    const result = page ? await buscarRecipe(page) : await mostrarAllRecipe();
     response.status(SUCCESS).json(result);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
