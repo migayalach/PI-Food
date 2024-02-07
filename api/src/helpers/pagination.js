@@ -4,7 +4,7 @@ const _length = 20;
 
 function pagination(page, pages) {
   if (page > pages) {
-    throw Error`Lo siento la pagina que busca no existe`;
+    throw Error`The page you are looking for does not exist.`;
   }
   if (page <= 1) {
     return {

@@ -29,7 +29,7 @@ const createRecipeHandler = async (request, response) => {
 
 // MUESTRA DATOS POR QUERY
 const getRecipesHandler = async (request, response) => {
-  const { page } = request.query;
+  const { page, name } = request.query;
   try {
     const result = page ? await buscarRecipe(page) : await mostrarAllRecipe();
     response.status(SUCCESS).json(result);

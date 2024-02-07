@@ -1,5 +1,4 @@
 const { Recipe, Diets } = require("../db");
-const { Op } = require("sequelize");
 const {
   addRecipeDiets,
   existRecipe,
@@ -8,15 +7,9 @@ const {
   duplicateImage,
   countData,
   resesponseData,
+  recipesData
 } = require("./helperController");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
-
-async function recipesData() {
-  return await Recipe.findAll({
-    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
-    order: [["idRecipe", "ASC"]],
-  });
-}
 
 // MOSTRAR TODAS LAS RECETAS
 const mostrarAllRecipe = async () => {

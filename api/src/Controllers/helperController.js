@@ -1,5 +1,5 @@
 const { Recipe, Diets, DietsRecipe } = require("../db");
-const { pagination, responseInfo, responseResult } = require("./pagination");
+const { responseInfo, responseResult } = require("../helpers/pagination");
 const { Op } = require("sequelize");
 
 // CONSULTAS SQL
@@ -45,6 +45,13 @@ async function duplicateImage(imageRecipe) {
   });
 }
 
+async function recipesData() {
+  return await Recipe.findAll({
+    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+    order: [["idRecipe", "ASC"]],
+  });
+}
+
 async function countData(option) {
   switch (option) {
     case "recipes":
@@ -72,4 +79,5 @@ module.exports = {
   duplicateImage,
   countData,
   resesponseData,
+  recipesData
 };
