@@ -1,4 +1,4 @@
-const { Recipe, Diets, DietsRecipe } = require("../db");
+const { Recipe, Diets } = require("../db");
 const { Op } = require("sequelize");
 const {
   addRecipeDiets,
@@ -9,23 +9,17 @@ const {
   countData,
   resesponseData,
 } = require("./helperController");
-const { resCreateRecipe } = require("../Utils/dietsUtils");
 const { clearDataRecipe } = require("../Utils/recipeUtils");
-const {
-  newArrRecipe,
-  responseBdd,
-  searchApi,
-  dataClear,
-} = require("../Utils/recipeUtils");
 
 // MOSTRAR TODAS LAS RECETAS
 const mostrarAllRecipe = async () => {
   const dataRecipe = await Recipe.findAll({
     include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+    order: [["idRecipe", "ASC"]],
   });
   const results = clearDataRecipe(dataRecipe);
   const count = await countData("recipes");
-  return await resesponseData(results, count);
+  return await resesponseData(results, count, (page = 1));
 };
 
 // CREAR RECETAS
