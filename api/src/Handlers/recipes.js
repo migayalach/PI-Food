@@ -4,6 +4,7 @@ const {
   mostrarAllRecipe,
   getRecipeData,
   putRecipeController,
+  searchName,
 } = require("../Controllers/recipesControllers");
 const SUCCESS = 200,
   ERROR = 400;
@@ -31,8 +32,23 @@ const createRecipeHandler = async (request, response) => {
 const getRecipesHandler = async (request, response) => {
   const { page, name } = request.query;
   try {
-    const result = page ? await buscarRecipe(page) : await mostrarAllRecipe();
-    response.status(SUCCESS).json(result);
+    // PARA TODO 
+    if (!name && !page) {
+      const result = await mostrarAllRecipe();
+      response.status(SUCCESS).json(result);
+    } else if (page && !name) {
+      const result = await buscarRecipe(page);
+      response.status(SUCCESS).json(result);
+    } //POR NOMBRE 
+    else if (name && !page) {
+      const result = await searchName(name, page);
+      response.status(SUCCESS).json(result);
+    } else if (page && name) {
+      const result = await searchName(name, page);
+      response.status(SUCCESS).json(result);
+      // const result = page ? await buscarRecipe(page) : await mostrarAllRecipe();
+      // response.status(SUCCESS).json(result);
+    }
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
   }
@@ -43,7 +59,6 @@ const getRecipeHandler = async (request, response) => {
   const { idRecipe } = request.params;
   try {
     const reciper = await getRecipeData(idRecipe);
-    console.log(reciper);
     response.status(SUCCESS).json(reciper);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
