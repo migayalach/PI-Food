@@ -52,6 +52,14 @@ async function recipesData() {
   });
 }
 
+async function recipeSearchName(name) {
+  return await Recipe.findAll({
+    where: { nameRecipe: { [Op.iLike]: `%${name}%` } },
+    include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
+    order: [["idRecipe", "ASC"]],
+  });
+}
+
 async function countData(option) {
   switch (option) {
     case "recipes":
@@ -69,6 +77,12 @@ function resesponseData(data, count, page) {
   return { info, result: result[page] };
 }
 
+function responseDataName(data, count, page, name) {
+  const info = responseInfo(count, page, name);
+  const result = responseResult(data);
+  return { info, result: result[page] };
+}
+
 module.exports = {
   existDiets,
   existRecipe,
@@ -79,5 +93,7 @@ module.exports = {
   duplicateImage,
   countData,
   resesponseData,
-  recipesData
+  recipesData,
+  recipeSearchName,
+  responseDataName,
 };
