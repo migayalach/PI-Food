@@ -7,9 +7,11 @@ const {
   duplicateImage,
   countData,
   resesponseData,
-  recipesData
+  recipesData,
+  recipeSearchName,
+  responseDataName,
 } = require("./helperController");
-const { clearDataRecipe } = require("../Utils/recipeUtils");
+const { clearDataRecipe, clearDataRecipeId } = require("../Utils/recipeUtils");
 
 // MOSTRAR TODAS LAS RECETAS
 const mostrarAllRecipe = async () => {
@@ -56,7 +58,8 @@ const getRecipeData = async (idRecipe) => {
     where: { idRecipe },
     include: { model: Diets, attributes: ["idDiet", "nameDiet"] },
   });
-  return clearDataRecipe([recipeId]);
+  const [data] = clearDataRecipeId([recipeId]);
+  return data;
 };
 
 // EDITAR RECETAS
@@ -102,6 +105,16 @@ async function buscarRecipe(page) {
   return await resesponseData(results, count, page);
 }
 
+const searchName = async (name, page) => {
+  const dataRecipe = await recipeSearchName(name);
+  const results = clearDataRecipe(dataRecipe);
+  const count = results.length;
+  if (name && !page) {
+    return await responseDataName(results, count, (page = 1), name);
+  }
+  return await responseDataName(results, count, page, name);
+};
+
 // ELIMINAR RECETAS
 const deleteRecipe = () => {};
 
@@ -111,4 +124,5 @@ module.exports = {
   mostrarAllRecipe,
   getRecipeData,
   putRecipeController,
+  searchName,
 };
