@@ -2,21 +2,39 @@ const { URL } = process.env;
 let _dictionary = {};
 const _length = 20;
 
-function pagination(page, pages) {
+function pagination(page, pages, name) {
   if (page > pages) {
     throw Error`The page you are looking for does not exist.`;
   }
   if (page <= 1) {
+    if (name) {
+      return {
+        next: `${URL}/recipes?page=2&name=${name}`,
+        prev: null,
+      };
+    }
     return {
       next: `${URL}/recipes?page=2`,
       prev: null,
     };
   } else if (page < pages) {
+    if (name) {
+      return {
+        next: `${URL}/recipes?page=${+page + 1}&name=${name}`,
+        prev: `${URL}/recipes?page=${page - 1}&name=${name}`,
+      };
+    }
     return {
       next: `${URL}/recipes?page=${+page + 1}`,
       prev: `${URL}/recipes?page=${page - 1}`,
     };
   } else {
+    if (name) {
+      return {
+        next: null,
+        prev: `${URL}/recipes?page=${page - 1}&name=${name}`,
+      };
+    }
     return {
       next: null,
       prev: `${URL}/recipes?page=${page - 1}`,
@@ -24,9 +42,18 @@ function pagination(page, pages) {
   }
 }
 
-function responseInfo(count, page) {
+function responseInfo(count, page, name) {
+  if (count <= _length) {
+    return {
+      count,
+      page,
+      next: null,
+      prev: null,
+    };
+  }
+
   const pages = Math.ceil(count / _length);
-  const pag = pagination(page, pages);
+  const pag = pagination(page, pages, name);
   const obj = {
     count,
     pages,
