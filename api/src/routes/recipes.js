@@ -1,7 +1,8 @@
 const { Router } = require("express");
 const {
-  validateRecipeName,
   validateCreateRecipe,
+  validateRecipeId,
+  validateRecipeIdParams,
 } = require("../Middlewares/recipeMiddleware");
 const {
   createRecipeHandler,
@@ -12,8 +13,13 @@ const {
 const recipesRouter = Router();
 
 recipesRouter.get("/", getRecipesHandler);
-recipesRouter.get("/:idRecipe", getRecipeHandler);
-recipesRouter.post("/", createRecipeHandler);
-recipesRouter.put("/", updateRecipeHandler);
+recipesRouter.get("/:idRecipe", validateRecipeIdParams, getRecipeHandler);
+recipesRouter.post("/", validateCreateRecipe, createRecipeHandler);
+recipesRouter.put(
+  "/",
+  validateRecipeId,
+  validateCreateRecipe,
+  updateRecipeHandler
+);
 
 module.exports = recipesRouter;
