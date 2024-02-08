@@ -32,22 +32,16 @@ const createRecipeHandler = async (request, response) => {
 const getRecipesHandler = async (request, response) => {
   const { page, name } = request.query;
   try {
-    // PARA TODO 
+    // PARA TODO
     if (!name && !page) {
       const result = await mostrarAllRecipe();
       response.status(SUCCESS).json(result);
     } else if (page && !name) {
       const result = await buscarRecipe(page);
       response.status(SUCCESS).json(result);
-    } //POR NOMBRE 
-    else if (name && !page) {
+    } else {
       const result = await searchName(name, page);
       response.status(SUCCESS).json(result);
-    } else if (page && name) {
-      const result = await searchName(name, page);
-      response.status(SUCCESS).json(result);
-      // const result = page ? await buscarRecipe(page) : await mostrarAllRecipe();
-      // response.status(SUCCESS).json(result);
     }
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
