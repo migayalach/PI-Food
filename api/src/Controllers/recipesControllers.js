@@ -78,13 +78,6 @@ const putRecipeController = async (
   if (!created) {
     throw Error`No tiene permisos para modificar esta receta`;
   }
-  if ((await duplicateName(nameRecipe)).length) {
-    throw Error`Lo siento no puede haber dos recetas con el mismo nombre`;
-  }
-  if ((await duplicateImage(imageRecipe)).length) {
-    throw Error`Lo siento no puede haber dos imagenes repetidas`;
-  }
-  // EDITAR RECETAS
   await Recipe.update(
     { nameRecipe, imageRecipe, summary, healthScore },
     { where: { idRecipe } }
