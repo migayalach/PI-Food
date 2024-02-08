@@ -75,10 +75,36 @@ function clearDataRecipe(dataRecipe) {
   );
 }
 
+function clearDataRecipeId(dataRecipe) {
+  return dataRecipe.map(
+    ({
+      idRecipe,
+      nameRecipe,
+      imageRecipe,
+      summary,
+      healthScore,
+      created,
+      diets,
+    }) => ({
+      idRecipe,
+      nameRecipe,
+      imageRecipe,
+      summary,
+      healthScore,
+      created,
+      diets: diets.map(({ idDiet, nameDiet }) => ({
+        idDiet,
+        nameDiet,
+      })),
+    })
+  );
+}
+
 module.exports = {
   newArrRecipe,
   responseBdd,
   searchApi,
   dataClear,
   clearDataRecipe,
+  clearDataRecipeId,
 };
