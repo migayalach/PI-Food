@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { GET_RECIPES, SEARCH_REC_ID, ERROR } from "./actionsType";
 
-const URL = `http://localhost:3001/food/`;
+const URL = `http://localhost:3001/food`;
 
 export const getRecipeAll = () => {
   return async function (dispatch) {
@@ -18,6 +18,18 @@ export const getRecipeAll = () => {
         payload: error.response.data,
       });
     }
+  };
+};
+
+export const getPagination = (page) => {
+  return async function (dispatch) {
+    try {
+      const pageCall = await axios.get(`${URL}/recipes?page=${page}`);
+      dispatch({
+        type: GET_RECIPES,
+        payload: pageCall.data,
+      });
+    } catch (error) {}
   };
 };
 
