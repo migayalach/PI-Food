@@ -14,17 +14,18 @@ import { getRecipeId } from "../../Redux/actions";
 // JAVASCRIP
 
 function Detail() {
-  const dispatch = useDispatch();
-  const { idRecipe } = useParams();
-  const selectRecipe = useSelector((state) => state.aux);
+  // const dispatch = useDispatch();
+  // const { idRecipe } = useParams();
+  // const selectRecipe = useSelector((state) => state.aux);
 
-  useEffect(() => {
-    dispatch(getRecipeId(idRecipe));
-  }, [idRecipe]);
+  // useEffect(() => {
+  //   dispatch(getRecipeId(idRecipe));
+  // }, [idRecipe]);
 
   return (
     <>
-      <Cards recipes={selectRecipe} />
+    detail
+      {/* <Cards recipes={selectRecipe} /> */}
     </>
   );
 }

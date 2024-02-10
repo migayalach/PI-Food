@@ -14,17 +14,18 @@ import { getRecipeAll } from "../../Redux/actions";
 // JAVASCRIP
 
 function Home() {
-  const dispatch = useDispatch();
-  const selectRecipe = useSelector((state) => state.recipes);
+  // const dispatch = useDispatch();
+  // const selectRecipe = useSelector((state) => state.recipes);
 
   useEffect(() => {
-    dispatch(getRecipeAll());
+    // dispatch(getRecipeAll());
   }, []);
 
   return (
     <>
-      <Filter />
-      <Cards recipes={selectRecipe} />
+      hom2
+      {/* <Filter />
+      <Cards recipes={selectRecipe} /> */}
     </>
   );
 }
