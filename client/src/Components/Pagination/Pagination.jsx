@@ -1,5 +1,5 @@
 // HOOK'S
-import React from "react";
+import React, { useEffect } from "react";
 
 // COMPONENTS
 import Button from "../Button";
@@ -11,15 +11,22 @@ import Button from "../Button";
 // JAVASCRIP
 
 function Pagination({ pages }) {
+  const aux = [];
 
-  const paginationButtons = [];
-  for (let i = 1; i <= pages; i++) {
-    paginationButtons.push(<Button key={i} pageNumber={i} />);
-  }
+  const lengthButton = (pages) => {
+    for (let i = 1; i <= pages; i++) {
+      aux.push(i);
+    }
+  };
+
+  lengthButton(pages);
+
   return (
-    <div>
-      {paginationButtons}
-    </div>
+    <>
+      {aux.map((index, i) => (
+        <Button key={index} number={i + 1} action="link" />
+      ))}
+    </>
   );
 }
 
