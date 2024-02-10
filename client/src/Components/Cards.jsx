@@ -15,18 +15,26 @@ function Cards({ recipes }) {
     <>
       {recipes.map(
         (
-          { id, title, image, summary, healthScore, instructions, diets },
+          {
+            idRecipe,
+            nameRecipe,
+            imageRecipe,
+            summary,
+            healthScore,
+            created,
+            diets,
+          },
           index
         ) => {
           return (
             <Card
               key={index}
-              id={id}
-              title={title}
-              image={image}
+              idRecipe={idRecipe}
+              nameRecipe={nameRecipe}
+              imageRecipe={imageRecipe}
               summary={summary}
               healthScore={healthScore}
-              instructions={instructions}
+              created={created}
               diets={diets}
             />
           );

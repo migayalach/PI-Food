@@ -10,7 +10,15 @@ import { Link } from "react-router-dom";
 
 // JAVASCRIP
 
-function Card({ id, title, image, summary, healthScore, instructions, diets }) {
+function Card({
+  idRecipe,
+  nameRecipe,
+  imageRecipe,
+  summary,
+  healthScore,
+  created,
+  diets,
+}) {
   const [favorite, setFavorite] = useState(false);
 
   const handleFavoriteCard = () => {
@@ -21,13 +29,18 @@ function Card({ id, title, image, summary, healthScore, instructions, diets }) {
     <div className="card-container">
       <button onClick={handleFavoriteCard}>❤️</button>
       <button onClick={handleFavoriteCard}>🤍</button>
-      <Link to={`/detail/${id}`}>
-        <p>{title}</p>
+      <Link to={`/detail/${idRecipe}`}>
+        <p>{nameRecipe}</p>
       </Link>
-      <img className="card-image" src={image} alt={title} />
+      <img className="card-image" src={imageRecipe} alt={nameRecipe} />
       <p>{healthScore}</p>
-      <p>{instructions}</p>
-      <p>{diets}</p>
+      <p>{created}</p>
+      <ul>
+        Diets:
+        {diets.map(({ nameDiet }, index) => (
+          <li key={index}>{nameDiet}</li>
+        ))}
+      </ul>
       <p>{summary}</p>
     </div>
   );
