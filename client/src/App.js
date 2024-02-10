@@ -31,7 +31,6 @@ const App = () => {
         <Route path="/detail/:idRecipe" component={Detail} />
         <Route path="/error" component={Error} />
       </Switch>
-      holis
     </div>
   );
 };
