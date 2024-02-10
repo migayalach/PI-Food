@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import Cards from "../../Components/Cards";
 import Filter from "../../Components/Filter/Filter";
+import Pagination from "../../Components/Pagination/Pagination";
 
 // REDUX
 import { getRecipeAll } from "../../Redux/actions";
@@ -15,17 +16,17 @@ import { getRecipeAll } from "../../Redux/actions";
 
 function Home() {
   const dispatch = useDispatch();
-  // const selectRecipe = useSelector((state) => state.recipes);
+  const selectRecipe = useSelector((state) => state.recipes);
 
   useEffect(() => {
-    // dispatch(getRecipeAll());
+    dispatch(getRecipeAll());
   }, []);
 
   return (
     <>
-      hom2
-      {/* <Filter />
-      <Cards recipes={selectRecipe} /> */}
+      <Filter />
+      <Cards recipes={selectRecipe} />
+      <Pagination />
     </>
   );
 }
