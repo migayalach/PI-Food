@@ -17,6 +17,7 @@ import { getRecipeAll } from "../../Redux/actions";
 function Home() {
   const dispatch = useDispatch();
   const selectRecipe = useSelector((state) => state.recipes);
+  const pages = useSelector((state) => state.page);
 
   useEffect(() => {
     dispatch(getRecipeAll());
@@ -26,7 +27,7 @@ function Home() {
     <>
       <Filter />
       <Cards recipes={selectRecipe} />
-      <Pagination />
+      <Pagination pages={pages} />
     </>
   );
 }

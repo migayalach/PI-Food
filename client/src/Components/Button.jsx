@@ -9,12 +9,12 @@ import React from "react";
 
 // JAVASCRIP
 
-function Button() {
+function Button({ pageNumber }) {
   const handlerLogin = () => {
     alert("hola");
   };
 
-  return <button onClick={handlerLogin}>Button</button>;
+  return <button onClick={handlerLogin}>{pageNumber}</button>;
 }
 
 export default Button;

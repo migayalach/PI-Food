@@ -1,9 +1,26 @@
-import React from 'react'
+// HOOK'S
+import React from "react";
 
-function Pagination() {
+// COMPONENTS
+import Button from "../Button";
+
+// REDUX
+
+// CSS
+
+// JAVASCRIP
+
+function Pagination({ pages }) {
+
+  const paginationButtons = [];
+  for (let i = 1; i <= pages; i++) {
+    paginationButtons.push(<Button key={i} pageNumber={i} />);
+  }
   return (
-    <div>Pagination</div>
-  )
+    <div>
+      {paginationButtons}
+    </div>
+  );
 }
 
-export default Pagination
+export default Pagination;
