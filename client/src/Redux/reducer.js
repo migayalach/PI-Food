@@ -1,32 +1,9 @@
-import {
-  filterDiets,
-  searchData,
-  orderScore,
-  orderAscDes,
-} from "../Utils/reducerFun";
-import {
-  GET_RECIPES,
-  SEARCH_REC_ID,
-  ERROR,
-  ADD_FAV,
-  REMOVE_FAV,
-  ADD_RECIPE,
-  SEARCH_RECIPE,
-  GET_DIETS,
-  ORDER_DIETS,
-  ORIGIN_API,
-  ORIGIN_CREATE,
-  ORDER_SCORE,
-  ORDER_AZ,
-  ORDER_ZA,
-} from "./actionsType";
+import { GET_RECIPES, SEARCH_REC_ID, ERROR } from "./actionsType";
 
 const initialState = {
   recipes: [],
-  myFavorites: [],
   diets: [],
   aux: [],
-  order: [],
   error: null,
 };
 
@@ -37,13 +14,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         recipes: payload,
       };
-
-    case SEARCH_REC_ID: {
-      return {
-        ...state,
-        aux: payload,
-      };
-    }
 
     default:
       return {

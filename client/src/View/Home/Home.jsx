@@ -14,7 +14,7 @@ import { getRecipeAll } from "../../Redux/actions";
 // JAVASCRIP
 
 function Home() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const selectRecipe = useSelector((state) => state.recipes);
 
   useEffect(() => {
