@@ -2,13 +2,12 @@ import axios from "axios";
 
 import { GET_RECIPES, SEARCH_REC_ID, ERROR } from "./actionsType";
 
-const URL = `http://localhost:3001/recipes`;
-const URL_DIETS = `http://localhost:3001/diets`;
+const URL = `http://localhost:3001/food/`;
 
 export const getRecipeAll = () => {
   return async function (dispatch) {
     try {
-      const allRecipe = await axios.get(`${URL}`);
+      const allRecipe = await axios.get(`${URL}/recipes`);
       dispatch({
         type: GET_RECIPES,
         payload: allRecipe.data,
