@@ -4,7 +4,7 @@ const initialState = {
   recipes: [],
   page: 0,
   diets: [],
-  aux: [],
+  aux: null,
   error: null,
 };
 
@@ -15,6 +15,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         recipes: payload.result,
         page: payload.info.pages,
+      };
+
+    case SEARCH_REC_ID:
+      return {
+        ...state,
+        aux: payload,
       };
 
     default:

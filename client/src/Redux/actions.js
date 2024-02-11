@@ -21,22 +21,10 @@ export const getRecipeAll = () => {
   };
 };
 
-export const getPagination = (page) => {
-  return async function (dispatch) {
-    try {
-      const pageCall = await axios.get(`${URL}/recipes?page=${page}`);
-      dispatch({
-        type: GET_RECIPES,
-        payload: pageCall.data,
-      });
-    } catch (error) {}
-  };
-};
-
 export const getRecipeId = (idRecipe) => {
   return async function (dispatch) {
     try {
-      const recipeData = await axios.get(`${URL}/${idRecipe}`);
+      const recipeData = await axios.get(`${URL}/recipes/${idRecipe}`);
       dispatch({
         type: SEARCH_REC_ID,
         payload: recipeData.data,
@@ -47,5 +35,17 @@ export const getRecipeId = (idRecipe) => {
         payload: error.response.data,
       });
     }
+  };
+};
+
+export const getPagination = (page) => {
+  return async function (dispatch) {
+    try {
+      const pageCall = await axios.get(`${URL}/recipes?page=${page}`);
+      dispatch({
+        type: GET_RECIPES,
+        payload: pageCall.data,
+      });
+    } catch (error) {}
   };
 };
