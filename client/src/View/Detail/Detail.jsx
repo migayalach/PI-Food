@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import Cards from "../../Components/Cards";
+import Card from "../../Components/Card/Card";
 
 // REDUX
 import { getRecipeId } from "../../Redux/actions";
@@ -14,18 +14,30 @@ import { getRecipeId } from "../../Redux/actions";
 // JAVASCRIP
 
 function Detail() {
-  // const dispatch = useDispatch();
-  // const { idRecipe } = useParams();
-  // const selectRecipe = useSelector((state) => state.aux);
+  const dispatch = useDispatch();
+  const { idRecipe } = useParams();
+  const selectAux = useSelector((state) => state.aux);
 
-  // useEffect(() => {
-  //   dispatch(getRecipeId(idRecipe));
-  // }, [idRecipe]);
+  useEffect(() => {
+    dispatch(getRecipeId(idRecipe));
+  }, []);
+
+  if (!selectAux || Object.keys(selectAux).length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-    detail
-      {/* <Cards recipes={selectRecipe} /> */}
+      <Card
+        idRecipe={idRecipe}
+        nameRecipe={selectAux.nameRecipe}
+        imageRecipe={selectAux.imageRecipe}
+        summary={selectAux.summary}
+        healthScore={selectAux.healthScore}
+        created={selectAux.created}
+        diets={selectAux.diets}
+        detail={true}
+      />
     </>
   );
 }
