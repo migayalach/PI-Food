@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_RECIPES, SEARCH_REC_ID, ERROR } from "./actionsType";
+import { GET_RECIPES, SEARCH_REC_ID, GET_DIETS, ERROR } from "./actionsType";
 
 const URL = `http://localhost:3001/food`;
 
@@ -35,6 +35,18 @@ export const getRecipeId = (idRecipe) => {
         payload: error.response.data,
       });
     }
+  };
+};
+
+export const getAllDiets = () => {
+  return async function (dispatch) {
+    try {
+      const dietsData = await axios.get(`${URL}/diets`);
+      dispatch({
+        type: GET_DIETS,
+        payload: dietsData.data,
+      });
+    } catch (error) {}
   };
 };
 
