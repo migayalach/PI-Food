@@ -1,4 +1,4 @@
-import { GET_RECIPES, SEARCH_REC_ID, ERROR } from "./actionsType";
+import { GET_RECIPES, SEARCH_REC_ID, GET_DIETS, ERROR } from "./actionsType";
 
 const initialState = {
   recipes: [],
@@ -21,6 +21,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         aux: payload,
+      };
+
+    case GET_DIETS:
+      return {
+        ...state,
+        diets: payload,
       };
 
     default:
