@@ -18,6 +18,7 @@ function Card({
   healthScore,
   created,
   diets,
+  detail,
 }) {
   const [favorite, setFavorite] = useState(false);
 
@@ -29,9 +30,14 @@ function Card({
     <div className="card-container">
       <button onClick={handleFavoriteCard}>❤️</button>
       <button onClick={handleFavoriteCard}>🤍</button>
-      <Link to={`/detail/${idRecipe}`}>
+      {detail ? (
         <p>{nameRecipe}</p>
-      </Link>
+      ) : (
+        <Link to={`/detail/${idRecipe}`}>
+          <p>{nameRecipe}</p>
+        </Link>
+      )}
+
       <img className="card-image" src={imageRecipe} alt={nameRecipe} />
       <p>{healthScore}</p>
       <p>{created}</p>
