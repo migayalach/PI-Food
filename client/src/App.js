@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
 // COMPONENTS
-import { About, Detail, Error, Form, Home, Favotire, Login } from "./View";
+import { About, Detail, Error, ConteinerForm, Home, Favotire, Login } from "./View";
 import NavBar from "./Components/NavBar/NavBar";
 
 // REDUX
@@ -26,7 +26,7 @@ const App = () => {
         <Route exact path="/" component={Login} />
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/form" component={Form} />
+        <Route path="/form" component={ConteinerForm} />
         <Route path="/favorite" component={Favotire} />
         <Route path="/detail/:idRecipe" component={Detail} />
         <Route path="/error" component={Error} />
