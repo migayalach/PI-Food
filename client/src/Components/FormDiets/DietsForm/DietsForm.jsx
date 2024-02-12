@@ -16,11 +16,16 @@ function DietsForm() {
   const dispatch = useDispatch();
   const selectDiets = useSelector((state) => state.diets);
   const [dataDiets, setDataDiets] = useState([]);
+  const [diets, setDiets] = useState([]);
 
   const handleAddDiet = (event) => {
-    const dataId = event.target.value;
-    const infoDiets = selectDiets.find(({ idDiet }) => idDiet === +dataId);
-    setDataDiets([...dataDiets, infoDiets]);
+    if (event.target.value) {
+      const infoDiets = selectDiets.find(
+        ({ idDiet }) => idDiet === +event.target.value
+      );
+      setDataDiets([...dataDiets, infoDiets]);
+      // setDiets(diets.filter(({ idDiet }) => idDiet !== +event.target.value));
+    }
   };
 
   const handleRemoveDiet = (idDiet) => {
@@ -29,13 +34,17 @@ function DietsForm() {
 
   useEffect(() => {
     dispatch(getAllDiets());
+    // setDiets(selectDiets);
   }, []);
+
+  // console.log(diets);
+  // console.log(selectDiets);
 
   return (
     <div>
       <label htmlFor="diets">Diets</label>
       <select name="diets" onChange={handleAddDiet}>
-        <option value=""></option>
+        <option></option>
         {selectDiets.map(({ idDiet, nameDiet }, index) => (
           <option key={index} value={idDiet} name={nameDiet}>
             {nameDiet}
