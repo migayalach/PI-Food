@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
+import ShowDIets from "../ShowDIets/ShowDIets";
 
 // REDUX
 import { getAllDiets } from "../../../Redux/actions";
@@ -16,10 +17,14 @@ function DietsForm() {
   const selectDiets = useSelector((state) => state.diets);
   const [dataDiets, setDataDiets] = useState([]);
 
-  const handleFormDiets = (event) => {
+  const handleAddDiet = (event) => {
     const dataId = event.target.value;
     const infoDiets = selectDiets.find(({ idDiet }) => idDiet === +dataId);
     setDataDiets([...dataDiets, infoDiets]);
+  };
+
+  const handleRemoveDiet = (idDiet) => {
+    setDataDiets(dataDiets.filter((index) => index.idDiet !== +idDiet));
   };
 
   useEffect(() => {
@@ -29,7 +34,7 @@ function DietsForm() {
   return (
     <div>
       <label htmlFor="diets">Diets</label>
-      <select name="diets" onChange={handleFormDiets}>
+      <select name="diets" onChange={handleAddDiet}>
         <option value=""></option>
         {selectDiets.map(({ idDiet, nameDiet }, index) => (
           <option key={index} value={idDiet} name={nameDiet}>
@@ -37,6 +42,7 @@ function DietsForm() {
           </option>
         ))}
       </select>
+      <ShowDIets dataDiets={dataDiets} removeDiet={handleRemoveDiet} />
     </div>
   );
 }
