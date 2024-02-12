@@ -3,7 +3,6 @@ import React from "react";
 
 // COMPONENTS
 import DietsForm from "../DietsForm/DietsForm";
-import ShowDIets from "../ShowDIets/ShowDIets";
 
 // REDUX
 
@@ -15,7 +14,6 @@ function ConteinerForm() {
   return (
     <div>
       <label htmlFor="diets">Diets</label>
-      <ShowDIets />
       <DietsForm />
     </div>
   );
