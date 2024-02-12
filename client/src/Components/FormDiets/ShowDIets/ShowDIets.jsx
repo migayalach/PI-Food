@@ -2,6 +2,7 @@
 import React from "react";
 
 // COMPONENTS
+import ButtonDelete from "../../ButtonDelete/ButtonDelete";
 
 // REDUX
 
@@ -9,10 +10,16 @@ import React from "react";
 
 // JAVASCRIP
 
-function ShowDIets() {
+function ShowDIets({ dataDiets, removeDiet }) {
   return (
-    <div>ShowDIets</div>
-  )
+    <div className="container-diets">
+      {dataDiets.map(({ idDiet, nameDiet }, i) => (
+        <div key={i}>
+          {nameDiet} <ButtonDelete idDiet={idDiet} removeDiet={removeDiet} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default ShowDIets
+export default ShowDIets;
