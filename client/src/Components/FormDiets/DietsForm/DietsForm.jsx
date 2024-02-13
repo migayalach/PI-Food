@@ -43,7 +43,7 @@ function DietsForm({ handleHookDiets }) {
       <label htmlFor="diets">Diets</label>
       <select name="diets" onChange={handleAddDiet}>
         <option></option>
-        {selectDiets.map(({ idDiet, nameDiet }, index) => (
+        {selectDiets?.map(({ idDiet, nameDiet }, index) => (
           <option key={index} value={idDiet} name={nameDiet}>
             {nameDiet}
           </option>
