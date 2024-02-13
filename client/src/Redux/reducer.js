@@ -1,4 +1,10 @@
-import { GET_RECIPES, SEARCH_REC_ID, GET_DIETS, ERROR } from "./actionsType";
+import {
+  GET_RECIPES,
+  SEARCH_REC_ID,
+  GET_DIETS,
+  CREATE_RECIPE,
+  ERROR,
+} from "./actionsType";
 
 const initialState = {
   recipes: [],
@@ -17,6 +23,11 @@ const reducer = (state = initialState, { type, payload }) => {
         page: payload.info.pages,
       };
 
+    case CREATE_RECIPE:
+      return {
+        recipes: payload.result,
+      };
+
     case SEARCH_REC_ID:
       return {
         ...state,
@@ -29,6 +40,13 @@ const reducer = (state = initialState, { type, payload }) => {
         diets: payload,
       };
 
+    case ERROR: 
+      return {
+        ...state,
+        error: payload.error
+      }
+
+  
     default:
       return {
         ...state,
