@@ -12,6 +12,7 @@ const initialState = {
   diets: [],
   aux: null,
   error: null,
+  success: false,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -21,11 +22,15 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         recipes: payload.result,
         page: payload.info.pages,
+        success: false,
       };
 
     case CREATE_RECIPE:
       return {
+        ...state,
         recipes: payload.result,
+        error: null,
+        success: true,
       };
 
     case SEARCH_REC_ID:
@@ -40,13 +45,12 @@ const reducer = (state = initialState, { type, payload }) => {
         diets: payload,
       };
 
-    case ERROR: 
+    case ERROR:
       return {
         ...state,
-        error: payload.error
-      }
+        error: payload.error,
+      };
 
-  
     default:
       return {
         ...state,
