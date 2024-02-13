@@ -1,6 +1,12 @@
 import axios from "axios";
 
-import { GET_RECIPES, SEARCH_REC_ID, GET_DIETS, ERROR } from "./actionsType";
+import {
+  GET_RECIPES,
+  SEARCH_REC_ID,
+  GET_DIETS,
+  CREATE_RECIPE,
+  ERROR,
+} from "./actionsType";
 
 const URL = `http://localhost:3001/food`;
 
@@ -28,6 +34,23 @@ export const getRecipeId = (idRecipe) => {
       dispatch({
         type: SEARCH_REC_ID,
         payload: recipeData.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.response.data,
+      });
+    }
+  };
+};
+
+export const postRecipe = (recipe) => {
+  return async function (dispatch) {
+    try {
+      const createRecipe = await axios.post(`${URL}/recipes`, recipe);
+      dispatch({
+        type: CREATE_RECIPE,
+        payload: createRecipe.data,
       });
     } catch (error) {
       dispatch({
