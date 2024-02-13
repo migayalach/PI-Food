@@ -1,6 +1,6 @@
 // HOOK'S
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // COMPONENTS
 
@@ -21,7 +21,7 @@ function Card({
   detail,
 }) {
   const [favorite, setFavorite] = useState(false);
-
+  const location = useLocation();
   const handleFavoriteCard = () => {
     alert(":D");
   };
@@ -37,17 +37,20 @@ function Card({
           <p>{nameRecipe}</p>
         </Link>
       )}
-
       <img className="card-image" src={imageRecipe} alt={nameRecipe} />
-      <p>{healthScore}</p>
-      <p>{created}</p>
-      <ul>
-        Diets:
-        {diets.map(({ nameDiet }, index) => (
-          <li key={index}>{nameDiet}</li>
-        ))}
-      </ul>
-      <p>{summary}</p>
+      {location.pathname !== "/home" && (
+        <div>
+          <p>{created}</p>
+          <p>{healthScore}</p>
+          <ul>
+            Diets:
+            {diets.map(({ nameDiet }, index) => (
+              <li key={index}>{nameDiet}</li>
+            ))}
+          </ul>
+          <p>{summary}</p>
+        </div>
+      )}
     </div>
   );
 }
