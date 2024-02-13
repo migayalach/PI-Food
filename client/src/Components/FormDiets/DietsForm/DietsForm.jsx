@@ -12,11 +12,10 @@ import { getAllDiets } from "../../../Redux/actions";
 
 // JAVASCRIP
 
-function DietsForm() {
+function DietsForm({ handleHookDiets }) {
   const dispatch = useDispatch();
   const selectDiets = useSelector((state) => state.diets);
   const [dataDiets, setDataDiets] = useState([]);
-  const [diets, setDiets] = useState([]);
 
   const handleAddDiet = (event) => {
     if (event.target.value) {
@@ -24,7 +23,6 @@ function DietsForm() {
         ({ idDiet }) => idDiet === +event.target.value
       );
       setDataDiets([...dataDiets, infoDiets]);
-      // setDiets(diets.filter(({ idDiet }) => idDiet !== +event.target.value));
     }
   };
 
@@ -34,11 +32,11 @@ function DietsForm() {
 
   useEffect(() => {
     dispatch(getAllDiets());
-    // setDiets(selectDiets);
   }, []);
 
-  // console.log(diets);
-  // console.log(selectDiets);
+  useEffect(() => {
+    handleHookDiets(dataDiets.map(({ idDiet }) => idDiet));
+  }, [dataDiets]);
 
   return (
     <div>
