@@ -1,9 +1,22 @@
-import React from 'react'
+// HOOK'S
+import React from "react";
 
-function ButtonSuccess() {
+// COMPONENTS
+
+// REDUX
+
+// CSS
+
+// JAVASCRIP
+
+function ButtonSuccess({ text, action }) {
   return (
-    <div>ButtonSuccess</div>
-  )
+    <div>
+      <label htmlFor="buton-send">
+        <button>{text}</button>;
+      </label>
+    </div>
+  );
 }
 
-export default ButtonSuccess
+export default ButtonSuccess;
