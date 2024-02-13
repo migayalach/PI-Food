@@ -10,11 +10,11 @@ import DietsForm from "../DietsForm/DietsForm";
 
 // JAVASCRIP
 
-function ConteinerForm() {
+function ConteinerForm({ handleHookDiets }) {
   return (
     <div>
       <label htmlFor="diets">Diets</label>
-      <DietsForm />
+      <DietsForm handleHookDiets={handleHookDiets} />
     </div>
   );
 }
