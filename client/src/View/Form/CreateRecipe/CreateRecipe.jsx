@@ -1,9 +1,10 @@
 // HOOK'S
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // COMPONENTS
 import ConteinerForm from "../../../Components/FormDiets/ConteinerForm/ConteinerForm";
+import ButtonSuccess from "../../../Components/ButtonSuccess/ButtonSuccess";
 
 // REDUX
 import { getAllDiets } from "../../../Redux/actions";
@@ -14,7 +15,6 @@ import { getAllDiets } from "../../../Redux/actions";
 
 function CreateRecipe() {
   const dispatch = useDispatch();
-  const selectDiets = useSelector((state) => state.diets);
   const [recipe, setRecipe] = useState({
     nameRecipe: "",
     image: "",
@@ -27,36 +27,34 @@ function CreateRecipe() {
     setRecipe({ ...recipe, [event.target.name]: event.target.value });
   };
 
+  const handleHookDiets = (dataArray) => {
+    setRecipe({ ...recipe, diets: dataArray });
+  };
+
+  const handleSendRecipe = (event) => {
+    event.preventDefault();
+    alert("enviando");
+  };
+
   useEffect(() => {
     dispatch(getAllDiets());
   }, []);
 
   return (
-    <form>
+    <form onSubmit={handleSendRecipe}>
       <div>
         <label htmlFor="name-recipe">Name recipe</label>
-        <input
-          type="text"
-          // value={recipe.nameRecipe}
-          name="nameRecipe"
-          onChange={handleFormRecipe}
-        />
+        <input type="text" name="nameRecipe" onChange={handleFormRecipe} />
       </div>
       <div>
         <label htmlFor="image-recipe">Image recipe</label>
-        <input
-          type="text"
-          // value={recipe.image}
-          name="image"
-          onChange={handleFormRecipe}
-        />
+        <input type="text" name="image" onChange={handleFormRecipe} />
       </div>
       <div>
         <label htmlFor="summary">Summary</label>
         <textarea
           type="text"
           name="summary"
-          // value={recipe.summary}
           onChange={handleFormRecipe}
           rows="4"
           cols="50"
@@ -64,14 +62,10 @@ function CreateRecipe() {
       </div>
       <div>
         <label htmlFor="health-score">HealthScore</label>
-        <input
-          type="number"
-          name="healthScore"
-          // value={recipe.healthScore}
-          onChange={handleFormRecipe}
-        />
+        <input type="number" name="healthScore" onChange={handleFormRecipe} />
       </div>
-      <ConteinerForm />
+      <ConteinerForm handleHookDiets={handleHookDiets} />
+      <ButtonSuccess text="Send" action="createRecipe" type="submit" />
     </form>
   );
 }
