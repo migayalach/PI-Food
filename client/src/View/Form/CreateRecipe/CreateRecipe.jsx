@@ -7,7 +7,7 @@ import ConteinerForm from "../../../Components/FormDiets/ConteinerForm/Conteiner
 import ButtonSuccess from "../../../Components/ButtonSuccess/ButtonSuccess";
 
 // REDUX
-import { getAllDiets } from "../../../Redux/actions";
+import { getAllDiets, postRecipe } from "../../../Redux/actions";
 
 // CSS
 
@@ -17,9 +17,10 @@ function CreateRecipe() {
   const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({
     nameRecipe: "",
-    image: "",
+    imageRecipe: "",
     summary: "",
     healthScore: 0,
+    created: true,
     diets: [],
   });
 
@@ -33,7 +34,7 @@ function CreateRecipe() {
 
   const handleSendRecipe = (event) => {
     event.preventDefault();
-    alert("enviando");
+    dispatch(postRecipe(recipe));
   };
 
   useEffect(() => {
@@ -47,8 +48,8 @@ function CreateRecipe() {
         <input type="text" name="nameRecipe" onChange={handleFormRecipe} />
       </div>
       <div>
-        <label htmlFor="image-recipe">Image recipe</label>
-        <input type="text" name="image" onChange={handleFormRecipe} />
+        <label htmlFor="image">Image recipe</label>
+        <input type="text" name="imageRecipe" onChange={handleFormRecipe} />
       </div>
       <div>
         <label htmlFor="summary">Summary</label>
