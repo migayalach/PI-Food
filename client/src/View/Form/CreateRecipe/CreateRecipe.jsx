@@ -1,6 +1,7 @@
 // HOOK'S
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 // COMPONENTS
 import ConteinerForm from "../../../Components/FormDiets/ConteinerForm/ConteinerForm";
@@ -14,7 +15,9 @@ import { getAllDiets, postRecipe } from "../../../Redux/actions";
 // JAVASCRIP
 
 function CreateRecipe() {
+  const successGlobal = useSelector((state) => state.success);
   const dispatch = useDispatch();
+  const navigation = useHistory();
   const [recipe, setRecipe] = useState({
     nameRecipe: "",
     imageRecipe: "",
@@ -40,6 +43,12 @@ function CreateRecipe() {
   useEffect(() => {
     dispatch(getAllDiets());
   }, []);
+
+  useEffect(() => {
+    if (successGlobal) {
+      navigation.push("/home");
+    }
+  }, [successGlobal]);
 
   return (
     <form onSubmit={handleSendRecipe}>
