@@ -13,7 +13,7 @@ import Card from "./Card/Card";
 function Cards({ recipes }) {
   return (
     <>
-      {recipes.map(
+      {recipes?.map(
         (
           {
             idRecipe,
