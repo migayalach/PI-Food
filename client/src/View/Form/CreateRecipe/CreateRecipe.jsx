@@ -13,6 +13,7 @@ import { getAllDiets, postRecipe } from "../../../Redux/actions";
 // CSS
 
 // JAVASCRIP
+import { validationRecipe } from "./validationRecipe";
 
 function CreateRecipe() {
   const successGlobal = useSelector((state) => state.success);
@@ -26,13 +27,18 @@ function CreateRecipe() {
     created: true,
     diets: [],
   });
+  const [error, setError] = useState({});
 
   const handleFormRecipe = (event) => {
     setRecipe({ ...recipe, [event.target.name]: event.target.value });
+    setError(
+      validationRecipe({ ...recipe, [event.target.name]: event.target.value })
+    );
   };
 
   const handleHookDiets = (dataArray) => {
     setRecipe({ ...recipe, diets: dataArray });
+    setError(validationRecipe({ ...recipe, diets: dataArray }));
   };
 
   const handleSendRecipe = (event) => {
@@ -55,10 +61,12 @@ function CreateRecipe() {
       <div>
         <label htmlFor="name-recipe">Name recipe</label>
         <input type="text" name="nameRecipe" onChange={handleFormRecipe} />
+        {error.nameRecipe && <p>{error.nameRecipe}</p>}
       </div>
       <div>
         <label htmlFor="image">Image recipe</label>
         <input type="text" name="imageRecipe" onChange={handleFormRecipe} />
+        {error.imageRecipe && <p>{error.imageRecipe}</p>}
       </div>
       <div>
         <label htmlFor="summary">Summary</label>
@@ -69,13 +77,24 @@ function CreateRecipe() {
           rows="4"
           cols="50"
         ></textarea>
+        {error.summary && <p>{error.summary}</p>}
       </div>
       <div>
         <label htmlFor="health-score">HealthScore</label>
-        <input type="number" name="healthScore" onChange={handleFormRecipe} />
+        <input
+          type="number"
+          name="healthScore"
+          onChange={handleFormRecipe}
+          min="0"
+          max="100"
+        />
+        {error.healthScore && <p>{error.healthScore}</p>}
       </div>
       <ConteinerForm handleHookDiets={handleHookDiets} />
-      <ButtonSuccess text="Send" action="createRecipe" type="submit" />
+      {error.diets && <p>{error.diets}</p>}
+      {Object.keys(error).length === 0 && (
+        <ButtonSuccess text="Send" action="createRecipe" type="submit" />
+      )}
     </form>
   );
 }
