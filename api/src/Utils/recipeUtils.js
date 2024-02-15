@@ -59,6 +59,7 @@ function clearDataRecipe(dataRecipe) {
       summary,
       healthScore,
       created,
+      favorite,
       diets,
     }) => ({
       idRecipe,
@@ -67,6 +68,7 @@ function clearDataRecipe(dataRecipe) {
       summary,
       healthScore,
       created,
+      favorite,
       diets: diets.map(({ idDiet, nameDiet }) => ({
         idDiet,
         nameDiet,
@@ -84,6 +86,7 @@ function clearDataRecipeId(dataRecipe) {
       summary,
       healthScore,
       created,
+      favorite,
       diets,
     }) => ({
       idRecipe,
@@ -92,6 +95,7 @@ function clearDataRecipeId(dataRecipe) {
       summary,
       healthScore,
       created,
+      favorite,
       diets: diets.map(({ idDiet, nameDiet }) => ({
         idDiet,
         nameDiet,
