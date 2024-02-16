@@ -3,7 +3,15 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
 // COMPONENTS
-import { About, Detail, Error, ConteinerForm, Home, Favotire, Login } from "./View";
+import {
+  About,
+  Detail,
+  Error,
+  ConteinerForm,
+  Home,
+  Favotire,
+  Login,
+} from "./View";
 import NavBar from "./Components/NavBar/NavBar";
 
 // REDUX
@@ -36,3 +44,8 @@ const App = () => {
 };
 
 export default App;
+
+
+
+// empty
+// carousel
