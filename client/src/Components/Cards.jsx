@@ -7,12 +7,14 @@ import Card from "./Card/Card";
 // REDUX
 
 // CSS
+import "./../StyleSheets/cards.css";
 
 // JAVASCRIP
 
 function Cards({ recipes }) {
   return (
-    <>
+    // "
+    <div className="conteiner-cards">
       {recipes?.map(
         (
           {
@@ -40,7 +42,7 @@ function Cards({ recipes }) {
           );
         }
       )}
-    </>
+    </div>
   );
 }
 
