@@ -6,7 +6,11 @@ import { Link, useLocation } from "react-router-dom";
 
 // REDUX
 
+// LIBRERY
+import { Image } from "antd";
+
 // CSS
+import "./card.css";
 
 // JAVASCRIP
 
@@ -28,8 +32,6 @@ function Card({
 
   return (
     <div className="card-container">
-      <button onClick={handleFavoriteCard}>❤️</button>
-      <button onClick={handleFavoriteCard}>🤍</button>
       {detail ? (
         <p>{nameRecipe}</p>
       ) : (
@@ -37,7 +39,9 @@ function Card({
           <p>{nameRecipe}</p>
         </Link>
       )}
-      <img className="card-image" src={imageRecipe} alt={nameRecipe} />
+      <button onClick={handleFavoriteCard}>❤️</button>
+      {/* <button onClick={handleFavoriteCard}>🤍</button> */}
+      <Image width={250} src={imageRecipe} alt={nameRecipe} />
       {location.pathname !== "/home" && (
         <div>
           <p>{created}</p>
