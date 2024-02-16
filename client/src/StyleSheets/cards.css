@@ -1,0 +1,6 @@
+.conteiner-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
