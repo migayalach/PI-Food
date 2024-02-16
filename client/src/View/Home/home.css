@@ -1,0 +1,11 @@
+.conteiner-cards-pagination {
+  align-items: center;
+  padding: 30px 20px 30px 20px;
+}
+
+.conteiner-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
