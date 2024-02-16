@@ -1,4 +1,8 @@
 body {
-    background-color: #1b1b32;
-    color: #fff;
+  margin: 0;
+  /* background-color: #1b1b32;
+    color: #fff; */
+}
+
+.App {
 }
