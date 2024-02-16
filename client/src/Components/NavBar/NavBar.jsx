@@ -1,33 +1,49 @@
 // HOOK'S
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 // COMPONENTS
 
 // REDUX
 
+// LIBRARY
+import { Menu, Switch } from "antd";
+
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  FormOutlined,
+  StarOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
+
 // CSS
+import "./nav-bar.css";
 
 // JAVASCRIP
+const { Item } = Menu;
 
 function NavBar() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/home">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="about">About</NavLink>
-      </li>
-      <li>
-        <NavLink to="form">Create</NavLink>
-      </li>
-
-      <li>
-        <NavLink to="favorite">Favorite</NavLink>
-      </li>
-      <li>Salir</li>
-    </ul>
+    <div className="conteiner-navBar">
+      <Menu theme="dark" mode="horizontal" className="menu">
+        <Item key="home" icon={<HomeOutlined />}>
+          <NavLink to="/home">Home</NavLink>
+        </Item>
+        <Item key="about" icon={<InfoCircleOutlined />}>
+          <NavLink to="/about">About</NavLink>
+        </Item>
+        <Item key="form" icon={<FormOutlined />}>
+          <NavLink to="/form">Create</NavLink>
+        </Item>
+        <Item key="favorite" icon={<StarOutlined />}>
+          <NavLink to="/favorite">Favorite</NavLink>
+        </Item>
+        <Item key="logout" icon={<LogoutOutlined />}>
+          Salir
+        </Item>
+      </Menu>
+    </div>
   );
 }
 
