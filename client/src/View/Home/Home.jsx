@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import Cards from "../../Components/Cards";
 import Filter from "../../Components/Filter/Filter";
-import Pagination from "../../Components/Pagination/Pagination";
+import PaginationComponent from "../../Components/PaginationComponent/PaginationComponent";
 
 // REDUX
 import { getRecipeAll } from "../../Redux/actions";
 
 // CSS
+import "./home.css";
 
 // JAVASCRIP
 
@@ -24,12 +25,19 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <Filter />
-      <Cards recipes={selectRecipe} />
-      <Pagination pages={pages} />
-    </>
+    <div className="conteiner-home">
+      <div>
+        <Filter />
+      </div>
+      <div>
+        <Cards recipes={selectRecipe} />
+      </div>
+      <div>
+        <PaginationComponent pages={pages} />
+      </div>
+    </div>
   );
 }
 
 export default Home;
+// className="conteiner-cards-pagination"
