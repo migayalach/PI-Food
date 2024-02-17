@@ -7,15 +7,16 @@ import CreateRecipe from "../CreateRecipe/CreateRecipe";
 // REDUX
 
 // CSS
+import "./container-form.css";
 
 // JAVASCRIP
 
 function ConteinerForm() {
   return (
-    <>
-      <div>Create a new recipe</div>
+    <div className="conteiner">
+      <h1>Create a new recipe</h1>
       <CreateRecipe />
-    </>
+    </div>
   );
 }
 
