@@ -100,6 +100,11 @@ function clearDataRecipeId(dataRecipe) {
   );
 }
 
+
+function removeHTMLtext (text) {
+  return text.replace(/<[^>]*>/g, "")
+};
+
 module.exports = {
   newArrRecipe,
   responseBdd,
@@ -107,4 +112,5 @@ module.exports = {
   dataClear,
   clearDataRecipe,
   clearDataRecipeId,
+  removeHTMLtext
 };
