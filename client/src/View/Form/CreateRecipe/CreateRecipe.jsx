@@ -77,7 +77,6 @@ function CreateRecipe() {
   };
 
   const handleSendRecipe = (event) => {
-    event.preventDefault();
     dispatch(postRecipe(recipe));
   };
 
@@ -90,13 +89,14 @@ function CreateRecipe() {
       navigation.push("/home");
     }
   }, [successGlobal]);
-  
+
   return (
     <Form
       {...formItemLayout}
       style={{
         maxWidth: 600,
       }}
+      onFinish={handleSendRecipe}
     >
       <Form.Item
         label="Name recipe"
@@ -212,3 +212,4 @@ export default CreateRecipe;
 //     <ButtonSuccess text="Send" action="createRecipe" type="submit" />
 //   )}
 // </form>
+

@@ -6,18 +6,27 @@ import ButtonDelete from "../../ButtonDelete/ButtonDelete";
 
 // REDUX
 
+// LIBRARY
+
 // CSS
+import "./show-dIets.css";
 
 // JAVASCRIP
 
 function ShowDIets({ dataDiets, removeDiet }) {
   return (
     <div className="container-diets">
-      {dataDiets.map(({ idDiet, nameDiet }, i) => (
-        <div key={i}>
-          {nameDiet} <ButtonDelete idDiet={idDiet} removeDiet={removeDiet} />
-        </div>
-      ))}
+      <ul className="list-ul">
+        {dataDiets.map(({ idDiet, nameDiet }, index) => (
+          <li key={index} className="list-li">
+            {nameDiet}
+            <ButtonDelete
+              idDiet={idDiet}
+              removeDiet={removeDiet}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

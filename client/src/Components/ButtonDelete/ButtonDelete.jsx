@@ -6,6 +6,7 @@ import React from "react";
 // REDUX
 
 // CSS
+import "./button-delete.css";
 
 // JAVASCRIP
 
@@ -14,7 +15,11 @@ function ButtonDelete({ idDiet, removeDiet }) {
     removeDiet(idDiet);
   };
 
-  return <div onClick={handleDeleteDiet}>X</div>;
+  return (
+    <button className="button-delete " onClick={handleDeleteDiet}>
+      X
+    </button>
+  );
 }
 
 export default ButtonDelete;

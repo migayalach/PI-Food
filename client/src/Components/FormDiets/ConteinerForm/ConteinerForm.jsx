@@ -13,7 +13,6 @@ import DietsForm from "../DietsForm/DietsForm";
 function ConteinerForm({ handleHookDiets }) {
   return (
     <div>
-      <label htmlFor="diets">Diets</label>
       <DietsForm handleHookDiets={handleHookDiets} />
     </div>
   );

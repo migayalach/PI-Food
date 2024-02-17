@@ -8,9 +8,14 @@ import ShowDIets from "../ShowDIets/ShowDIets";
 // REDUX
 import { getAllDiets } from "../../../Redux/actions";
 
+// LIBRARY
+import { Select } from "antd";
+
 // CSS
 
 // JAVASCRIP
+
+const { Option } = Select;
 
 function DietsForm({ handleHookDiets }) {
   const dispatch = useDispatch();
@@ -18,10 +23,8 @@ function DietsForm({ handleHookDiets }) {
   const [dataDiets, setDataDiets] = useState([]);
 
   const handleAddDiet = (event) => {
-    if (event.target.value) {
-      const infoDiets = selectDiets.find(
-        ({ idDiet }) => idDiet === +event.target.value
-      );
+    if (event) {
+      const infoDiets = selectDiets.find(({ idDiet }) => idDiet === +event);
       setDataDiets([...dataDiets, infoDiets]);
     }
   };
@@ -41,14 +44,20 @@ function DietsForm({ handleHookDiets }) {
   return (
     <div>
       <label htmlFor="diets">Diets</label>
-      <select name="diets" onChange={handleAddDiet}>
-        <option></option>
+      <Select
+        style={{
+          width: "100%",
+        }}
+        placeholder="Please select"
+        defaultValue={[]}
+        onChange={handleAddDiet}
+      >
         {selectDiets?.map(({ idDiet, nameDiet }, index) => (
-          <option key={index} value={idDiet} name={nameDiet}>
+          <Option key={index} value={idDiet}>
             {nameDiet}
-          </option>
+          </Option>
         ))}
-      </select>
+      </Select>
       <ShowDIets dataDiets={dataDiets} removeDiet={handleRemoveDiet} />
     </div>
   );
