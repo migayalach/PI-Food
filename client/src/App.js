@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {}, []);
 
   return (
-    <div className="App">
+    <div>
       {location.pathname !== "/" && <NavBar />}
       <Switch>
         <Route exact path="/" component={Login} />
@@ -44,8 +44,6 @@ const App = () => {
 };
 
 export default App;
-
-
 
 // empty
 // carousel
