@@ -1,5 +1,6 @@
 const { Diets, Recipe } = require("../db");
 const localBdd = require("../Utils/dataBaseLocal");
+const { removeHTMLtext } = require("../Utils/recipeUtils");
 const { clearDiets, reviewDiets } = require("../helpers/clearDataBdd");
 const {
   existDiets,
@@ -30,7 +31,7 @@ const updateDataBdd = async () => {
       healthScore,
       title,
       image,
-      summary,
+      summary: removeHTMLtext(summary),
       diets: await dietsPrommise(diets),
     })
   );
