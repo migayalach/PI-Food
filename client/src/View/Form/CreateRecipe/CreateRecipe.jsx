@@ -10,10 +10,40 @@ import ButtonSuccess from "../../../Components/ButtonSuccess/ButtonSuccess";
 // REDUX
 import { getAllDiets, postRecipe } from "../../../Redux/actions";
 
+// LIBRARY
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Mentions,
+  Select,
+} from "antd";
+
 // CSS
 
 // JAVASCRIP
 import { validationRecipe } from "./validationRecipe";
+const { RangePicker } = DatePicker;
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 6,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 14,
+    },
+  },
+};
 
 function CreateRecipe() {
   const successGlobal = useSelector((state) => state.success);
@@ -29,11 +59,16 @@ function CreateRecipe() {
   });
   const [error, setError] = useState({});
 
-  const handleFormRecipe = (event) => {
-    setRecipe({ ...recipe, [event.target.name]: event.target.value });
-    setError(
-      validationRecipe({ ...recipe, [event.target.name]: event.target.value })
-    );
+  const handleFormRecipe = (eventTargetName, event) => {
+    if (eventTargetName === "healthScore") {
+      setRecipe({ ...recipe, [eventTargetName]: event });
+      setError(validationRecipe({ ...recipe, [eventTargetName]: event }));
+    } else {
+      setRecipe({ ...recipe, [eventTargetName]: event.target.value });
+      setError(
+        validationRecipe({ ...recipe, [eventTargetName]: event.target.value })
+      );
+    }
   };
 
   const handleHookDiets = (dataArray) => {
@@ -55,48 +90,125 @@ function CreateRecipe() {
       navigation.push("/home");
     }
   }, [successGlobal]);
-
+  
   return (
-    <form onSubmit={handleSendRecipe}>
-      <div>
-        <label htmlFor="name-recipe">Name recipe</label>
-        <input type="text" name="nameRecipe" onChange={handleFormRecipe} />
-        {error.nameRecipe && <p>{error.nameRecipe}</p>}
-      </div>
-      <div>
-        <label htmlFor="image">Image recipe</label>
-        <input type="text" name="imageRecipe" onChange={handleFormRecipe} />
-        {error.imageRecipe && <p>{error.imageRecipe}</p>}
-      </div>
-      <div>
-        <label htmlFor="summary">Summary</label>
-        <textarea
-          type="text"
-          name="summary"
-          onChange={handleFormRecipe}
-          rows="4"
-          cols="50"
-        ></textarea>
-        {error.summary && <p>{error.summary}</p>}
-      </div>
-      <div>
-        <label htmlFor="health-score">HealthScore</label>
-        <input
-          type="number"
-          name="healthScore"
-          onChange={handleFormRecipe}
-          min="0"
-          max="100"
+    <Form
+      {...formItemLayout}
+      style={{
+        maxWidth: 600,
+      }}
+    >
+      <Form.Item
+        label="Name recipe"
+        name="nameRecipe"
+        rules={[
+          {
+            required: true,
+            message: "Please input!",
+          },
+        ]}
+      >
+        <Input onChange={(event) => handleFormRecipe("nameRecipe", event)} />
+      </Form.Item>
+
+      <Form.Item
+        label="Image recipe"
+        name="imageRecipe"
+        rules={[
+          {
+            required: true,
+            message: "Please input!",
+          },
+        ]}
+      >
+        <Input onChange={(event) => handleFormRecipe("imageRecipe", event)} />
+      </Form.Item>
+
+      <Form.Item
+        label="Summary"
+        name="summary"
+        rules={[
+          {
+            required: true,
+            message: "Please input!",
+          },
+        ]}
+      >
+        <Input.TextArea
+          onChange={(event) => handleFormRecipe("summary", event)}
         />
-        {error.healthScore && <p>{error.healthScore}</p>}
-      </div>
+      </Form.Item>
+
+      <Form.Item
+        label="HealthScore"
+        name="healthScore"
+        rules={[
+          {
+            type: "number",
+            min: 0,
+            max: 100,
+          },
+        ]}
+      >
+        <InputNumber
+          onChange={(event) => handleFormRecipe("healthScore", event)}
+        />
+      </Form.Item>
+
       <ConteinerForm handleHookDiets={handleHookDiets} />
-      {error.diets && <p>{error.diets}</p>}
-      {Object.keys(error).length === 0 && (
-        <ButtonSuccess text="Send" action="createRecipe" type="submit" />
-      )}
-    </form>
+
+      <Form.Item
+        wrapperCol={{
+          offset: 6,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }
 
 export default CreateRecipe;
+
+// <form onSubmit={handleSendRecipe}>
+//   <div>
+//     <label htmlFor="name-recipe">Name recipe</label>
+//     <input type="text" name="nameRecipe" onChange={handleFormRecipe} />
+//     {error.nameRecipe && <p>{error.nameRecipe}</p>}
+//   </div>
+//   <div>
+//     <label htmlFor="image">Image recipe</label>
+//     <input type="text" name="imageRecipe" onChange={handleFormRecipe} />
+//     {error.imageRecipe && <p>{error.imageRecipe}</p>}
+//   </div>
+//   <div>
+//     <label htmlFor="summary">Summary</label>
+//     <textarea
+//       type="text"
+//       name="summary"
+//       onChange={handleFormRecipe}
+//       rows="4"
+//       cols="50"
+//     ></textarea>
+//     {error.summary && <p>{error.summary}</p>}
+//   </div>
+//   <div>
+//     <label htmlFor="health-score">HealthScore</label>
+//     <input
+//       type="number"
+//       name="healthScore"
+//       onChange={handleFormRecipe}
+//       min="0"
+//       max="100"
+//     />
+//     {error.healthScore && <p>{error.healthScore}</p>}
+//   </div>
+//   <ConteinerForm handleHookDiets={handleHookDiets} />
+//   {error.diets && <p>{error.diets}</p>}
+//   {Object.keys(error).length === 0 && (
+//     <ButtonSuccess text="Send" action="createRecipe" type="submit" />
+//   )}
+// </form>
