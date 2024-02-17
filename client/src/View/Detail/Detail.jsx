@@ -4,14 +4,18 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import Card from "../../Components/Card/Card";
 
 // REDUX
 import { getRecipeId } from "../../Redux/actions";
 
+// LIBRARY
+import { Card, Image } from "antd";
+
 // CSS
+import "./detail.css";
 
 // JAVASCRIP
+const { Meta } = Card;
 
 function Detail() {
   const dispatch = useDispatch();
@@ -27,19 +31,34 @@ function Detail() {
   }
 
   return (
-    <>
-      <Card
-        idRecipe={idRecipe}
-        nameRecipe={selectAux.nameRecipe}
-        imageRecipe={selectAux.imageRecipe}
-        summary={selectAux.summary}
-        healthScore={selectAux.healthScore}
-        created={selectAux.created}
-        diets={selectAux.diets}
-        detail={true}
-      />
-    </>
+    <div className="conteiner-card">
+      <div>
+        <h1>{selectAux.nameRecipe}</h1>
+        <Meta description={selectAux.summary} className="text" />
+        <h3>healthScore: {selectAux.healthScore}</h3>
+        <h4>Diets:</h4>
+        <div className="list-conteiner">
+          <ul className="ul-list">
+            {selectAux.diets.map(({ nameDiet }, index) => (
+              <li key={index} className="li-list">
+                {nameDiet}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div>
+        <Image
+          width={500}
+          src={selectAux.imageRecipe}
+          alt={selectAux.nameRecipe}
+          className="image"
+        />
+      </div>
+    </div>
   );
 }
 
 export default Detail;
+
+//     <p>{created}</p>
