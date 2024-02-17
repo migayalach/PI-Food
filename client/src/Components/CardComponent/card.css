@@ -1,0 +1,20 @@
+.card-container {
+  /* border: 2px solid black; */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  padding: 5px;
+}
+
+.conteiner-favorite {
+  position: absolute;
+  top: 0.5%;
+  left: 90%;
+}
+
+.button-favorite {
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  font-size: 17px;
+}
