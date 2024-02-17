@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import Card from "./Card/Card";
+import CardComponent from "./CardComponent/CardComponent";
 
 // REDUX
 
@@ -16,28 +16,14 @@ function Cards({ recipes }) {
     // "
     <div className="conteiner-cards">
       {recipes?.map(
-        (
-          {
-            idRecipe,
-            nameRecipe,
-            imageRecipe,
-            summary,
-            healthScore,
-            created,
-            diets,
-          },
-          index
-        ) => {
+        ({ idRecipe, nameRecipe, imageRecipe, healthScore }, index) => {
           return (
-            <Card
+            <CardComponent
               key={index}
               idRecipe={idRecipe}
               nameRecipe={nameRecipe}
               imageRecipe={imageRecipe}
-              summary={summary}
               healthScore={healthScore}
-              created={created}
-              diets={diets}
             />
           );
         }
