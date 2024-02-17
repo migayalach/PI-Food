@@ -1,0 +1,27 @@
+.container-diets {
+  width: 180px;
+}
+
+/* Estilos para la lista desordenada */
+.list-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Estilos para los elementos de la lista */
+.list-li {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 7px;
+  text-align: center;
+}
+
+/* Estilos al pasar el mouse sobre los elementos */
+.list-li:hover {
+  transform: translateY(-4px);
+}
