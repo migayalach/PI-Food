@@ -16,7 +16,6 @@ import "./card.css";
 const { Meta } = Card;
 
 function CardComponent({ idRecipe, nameRecipe, imageRecipe, healthScore }) {
-  
   const [favorite, setFavorite] = useState(false);
   const handleFavoriteCard = () => {
     alert(":D");
