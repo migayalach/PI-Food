@@ -60,6 +60,7 @@ function clearDataRecipe(dataRecipe) {
       healthScore,
       created,
       diets,
+      favorite,
     }) => ({
       idRecipe,
       nameRecipe,
@@ -71,6 +72,7 @@ function clearDataRecipe(dataRecipe) {
         idDiet,
         nameDiet,
       })),
+      favorite,
     })
   );
 }
@@ -100,10 +102,9 @@ function clearDataRecipeId(dataRecipe) {
   );
 }
 
-
-function removeHTMLtext (text) {
-  return text.replace(/<[^>]*>/g, "")
-};
+function removeHTMLtext(text) {
+  return text.replace(/<[^>]*>/g, "");
+}
 
 module.exports = {
   newArrRecipe,
@@ -112,5 +113,5 @@ module.exports = {
   dataClear,
   clearDataRecipe,
   clearDataRecipeId,
-  removeHTMLtext
+  removeHTMLtext,
 };
