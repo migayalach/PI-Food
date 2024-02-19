@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
+import MyFavorite from "../../Components/MyFavorite/MyFavorite";
 
 // REDUX
-import { getRecipeId } from "../../Redux/actions";
+import { getRecipeId, postFavorite } from "../../Redux/actions";
 
 // LIBRARY
 import { Card, Image } from "antd";
@@ -21,6 +22,17 @@ function Detail() {
   const dispatch = useDispatch();
   const { idRecipe } = useParams();
   const selectAux = useSelector((state) => state.aux);
+
+  const handleFavorite = () => {
+    dispatch(
+      postFavorite({
+        idRecipe: selectAux.idRecipe,
+        favorite: !selectAux.favorite,
+        flag: "favorite",
+      })
+    );
+    dispatch(getRecipeId(idRecipe));
+  };
 
   useEffect(() => {
     dispatch(getRecipeId(idRecipe));
@@ -55,6 +67,11 @@ function Detail() {
           className="image"
         />
       </div>
+      <MyFavorite
+        myFavorite="myFavorite"
+        favorite={selectAux.favorite}
+        handleFavorite={handleFavorite}
+      />
     </div>
   );
 }
