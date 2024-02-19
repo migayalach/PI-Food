@@ -16,11 +16,12 @@ import "./pagination.css";
 
 // JAVASCRIP
 
-function PaginationComponent({ pages }) {
+function PaginationComponent({ pages, pageCurrent }) {
   const dispatch = useDispatch();
 
   const handlerLogin = (page) => {
     dispatch(getPagination(page));
+    pageCurrent(page);
   };
 
   return (
