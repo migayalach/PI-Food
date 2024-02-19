@@ -1,5 +1,5 @@
 // HOOK'S
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
@@ -17,9 +17,16 @@ const { Meta } = Card;
 
 function CardComponent({ idRecipe, nameRecipe, imageRecipe, healthScore }) {
   const [favorite, setFavorite] = useState(false);
-  const handleFavoriteCard = () => {
-    alert(":D");
+
+  const handleFavoriteCard = (idRecipe) => {
+    setFavorite(!favorite);
+    // const obj = { idRecipe, favorite };
+    // console.log(obj);
   };
+
+  console.log(favorite);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="card-container">
@@ -37,12 +44,21 @@ function CardComponent({ idRecipe, nameRecipe, imageRecipe, healthScore }) {
           />
         </Link>
         <div className="conteiner-favorite">
-          <button className="button-favorite" onClick={handleFavoriteCard}>
-            ❤️
-          </button>
-          {/* <button className="button-favorite" onClick={handleFavoriteCard}>
-            🤍
-          </button> */}
+          {favorite ? (
+            <button
+              className="button-favorite"
+              onClick={() => handleFavoriteCard(idRecipe)}
+            >
+              ❤️
+            </button>
+          ) : (
+            <button
+              className="button-favorite"
+              onClick={() => handleFavoriteCard(idRecipe)}
+            >
+              🤍
+            </button>
+          )}
         </div>
       </Card>
     </div>
