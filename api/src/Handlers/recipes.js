@@ -68,6 +68,8 @@ const updateRecipeHandler = async (request, response) => {
     healthScore,
     created,
     diets,
+    favorite,
+    flag,
   } = request.body;
   try {
     const data = await putRecipeController(
@@ -77,7 +79,9 @@ const updateRecipeHandler = async (request, response) => {
       summary,
       healthScore,
       created,
-      diets
+      diets,
+      favorite,
+      flag
     );
     response.status(200).json(data);
   } catch (error) {
