@@ -19,6 +19,11 @@ function Home() {
   const dispatch = useDispatch();
   const selectRecipe = useSelector((state) => state.recipes);
   const pages = useSelector((state) => state.page);
+  const [page, setPage] = useState(1);
+
+  const pageCurrent = (data) => {
+    setPage(data);
+  };
 
   useEffect(() => {
     dispatch(getRecipeAll());
@@ -30,14 +35,13 @@ function Home() {
         <Filter />
       </div>
       <div>
-        <Cards recipes={selectRecipe} />
+        <Cards recipes={selectRecipe} page={page} />
       </div>
       <div>
-        <PaginationComponent pages={pages} />
+        <PaginationComponent pages={pages} pageCurrent={pageCurrent} />
       </div>
     </div>
   );
 }
 
 export default Home;
-// className="conteiner-cards-pagination"
