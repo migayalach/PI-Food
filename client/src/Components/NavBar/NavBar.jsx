@@ -1,5 +1,5 @@
 // HOOK'S
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 // COMPONENTS
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 // REDUX
 
 // LIBRARY
-import { Menu, Switch } from "antd";
+import { Menu } from "antd";
 
 import {
   HomeOutlined,
@@ -40,7 +40,7 @@ function NavBar() {
           <NavLink to="/favorite">Favorite</NavLink>
         </Item>
         <Item key="logout" icon={<LogoutOutlined />}>
-          Salir
+          <NavLink to="/">Salir</NavLink>
         </Item>
       </Menu>
     </div>
