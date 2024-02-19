@@ -50,7 +50,6 @@ const reducer = (state = initialState, { type, payload }) => {
     case FAVORITE:
       return {
         ...state,
-        favorites: payload.result
       };
 
     case ERROR:
