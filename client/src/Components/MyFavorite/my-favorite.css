@@ -1,0 +1,18 @@
+.conteiner-favorite {
+  position: absolute;
+  top: 0.5%;
+  left: 90%;
+}
+
+.favorite-detail {
+  position: absolute;
+  top: 19%;
+  left: 88%;
+}
+
+.button-favorite {
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  font-size: 17px;
+}
