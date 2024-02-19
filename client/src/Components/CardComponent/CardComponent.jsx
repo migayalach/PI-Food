@@ -1,12 +1,12 @@
 // HOOK'S
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
 
 // REDUX
-import { postFavorite } from "../../Redux/actions";
+import { postFavorite, getPagination } from "../../Redux/actions";
 
 // LIBRERY
 import { Card, Image } from "antd";
@@ -17,21 +17,39 @@ import "./card.css";
 // JAVASCRIP
 const { Meta } = Card;
 
-function CardComponent({ idRecipe, nameRecipe, imageRecipe, healthScore }) {
+function CardComponent({
+  idRecipe,
+  nameRecipe,
+  imageRecipe,
+  healthScore,
+  favorite,
+  page,
+}) {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
-  const [favorite, setFavorite] = useState(false);
-
+  const [favoriteCard, setFavoriteCard] = useState(false);
+  
   const handleFavoriteCard = () => {
-    setFavorite(!favorite);
+    setFavoriteCard(!favoriteCard);
     setFlag(true);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (flag) {
-      dispatch(postFavorite({ idRecipe, favorite, flag: "favorite" }));
+      dispatch(
+        await postFavorite({
+          idRecipe,
+          favorite: favoriteCard,
+          flag: "favorite",
+        })
+      );
       setFlag(false);
+      dispatch(getPagination(page));
     }
+  }, [favoriteCard]);
+
+  useEffect(() => {
+    setFavoriteCard(favorite);
   }, [favorite]);
 
   return (
@@ -50,7 +68,7 @@ function CardComponent({ idRecipe, nameRecipe, imageRecipe, healthScore }) {
           />
         </Link>
         <div className="conteiner-favorite">
-          {favorite ? (
+          {favoriteCard ? (
             <button
               className="button-favorite"
               onClick={() => handleFavoriteCard()}
