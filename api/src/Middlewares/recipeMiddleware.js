@@ -38,42 +38,50 @@ const validateRecipeIdParams = (request, response, next) => {
 };
 
 const validateCreateRecipe = (request, response, next) => {
-  const { nameRecipe, imageRecipe, summary, healthScore, created, diets } =
-    request.body;
+  const {
+    nameRecipe,
+    imageRecipe,
+    summary,
+    healthScore,
+    created,
+    diets,
+    flag,
+  } = request.body;
+  if (!flag) {
+    if (!nameRecipe)
+      return response.status(ERROR).json({ error: "Falta nombre" });
 
-  if (!nameRecipe)
-    return response.status(ERROR).json({ error: "Falta nombre" });
+    if (!imageRecipe)
+      return response
+        .status(ERROR)
+        .json({ error: "Falta una URL para la imagen" });
 
-  if (!imageRecipe)
-    return response
-      .status(ERROR)
-      .json({ error: "Falta una URL para la imagen" });
+    if (!summary)
+      return response
+        .status(ERROR)
+        .json({ error: "Por favor agrega un resumen para esta receta" });
 
-  if (!summary)
-    return response
-      .status(ERROR)
-      .json({ error: "Por favor agrega un resumen para esta receta" });
+    if (summary.length < 100) {
+      return response
+        .status(ERROR)
+        .json({ error: "Por favor agrega un resumen mas largo" });
+    }
 
-  if (summary.length < 100) {
-    return response
-      .status(ERROR)
-      .json({ error: "Por favor agrega un resumen mas largo" });
+    if (!parseFloat(healthScore))
+      return response.status(ERROR).json({
+        error: "Por favor introduzca una calificacion",
+      });
+
+    if (created !== true)
+      return response
+        .status(ERROR)
+        .json({ error: "Usted no tiene permiso para alterar este campo" });
+
+    if (!diets.length)
+      return response
+        .status(ERROR)
+        .json({ error: "Introduce por lo menos una dieta" });
   }
-
-  if (!parseFloat(healthScore))
-    return response.status(ERROR).json({
-      error: "Por favor introduzca una calificacion",
-    });
-
-  if (created !== true)
-    return response
-      .status(ERROR)
-      .json({ error: "Usted no tiene permiso para alterar este campo" });
-
-  if (!diets.length)
-    return response
-      .status(ERROR)
-      .json({ error: "Introduce por lo menos una dieta" });
   next();
 };
 
