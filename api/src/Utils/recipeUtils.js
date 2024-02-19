@@ -87,6 +87,7 @@ function clearDataRecipeId(dataRecipe) {
       healthScore,
       created,
       diets,
+      favorite,
     }) => ({
       idRecipe,
       nameRecipe,
@@ -98,6 +99,7 @@ function clearDataRecipeId(dataRecipe) {
         idDiet,
         nameDiet,
       })),
+      favorite,
     })
   );
 }
