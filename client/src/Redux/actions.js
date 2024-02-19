@@ -5,6 +5,7 @@ import {
   SEARCH_REC_ID,
   GET_DIETS,
   CREATE_RECIPE,
+  FAVORITE,
   ERROR,
 } from "./actionsType";
 
@@ -68,6 +69,18 @@ export const getAllDiets = () => {
       dispatch({
         type: GET_DIETS,
         payload: dietsData.data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const postFavorite = (data) => {
+  return async function (dispatch) {
+    try {
+      const favorite = await axios.put(`${URL}/recipes`, data);
+      dispatch({
+        type: FAVORITE,
+        payload: favorite.data,
       });
     } catch (error) {}
   };
