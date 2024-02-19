@@ -1,9 +1,10 @@
 // HOOK'S
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
+import MyFavorite from "../MyFavorite/MyFavorite";
 
 // REDUX
 import { postFavorite, getPagination } from "../../Redux/actions";
@@ -28,7 +29,7 @@ function CardComponent({
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
   const [favoriteCard, setFavoriteCard] = useState(false);
-  
+
   const handleFavoriteCard = () => {
     setFavoriteCard(!favoriteCard);
     setFlag(true);
@@ -67,23 +68,10 @@ function CardComponent({
             description={`healthScore: ${healthScore}`}
           />
         </Link>
-        <div className="conteiner-favorite">
-          {favoriteCard ? (
-            <button
-              className="button-favorite"
-              onClick={() => handleFavoriteCard()}
-            >
-              ❤️
-            </button>
-          ) : (
-            <button
-              className="button-favorite"
-              onClick={() => handleFavoriteCard()}
-            >
-              🤍
-            </button>
-          )}
-        </div>
+        <MyFavorite
+          favorite={favorite}
+          handleFavoriteCard={handleFavoriteCard}
+        />
       </Card>
     </div>
   );
