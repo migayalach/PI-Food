@@ -3,6 +3,7 @@ import {
   SEARCH_REC_ID,
   GET_DIETS,
   CREATE_RECIPE,
+  FAVORITE,
   ERROR,
 } from "./actionsType";
 
@@ -10,6 +11,7 @@ const initialState = {
   recipes: [],
   page: 0,
   diets: [],
+  favorites: [],
   aux: null,
   error: null,
   success: false,
@@ -43,6 +45,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         diets: payload,
+      };
+
+    case FAVORITE:
+      return {
+        ...state,
+        recipes: payload.result,
       };
 
     case ERROR:
