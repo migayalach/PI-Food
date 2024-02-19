@@ -70,8 +70,15 @@ const putRecipeController = async (
   summary,
   healthScore,
   created,
-  diets
+  diets,
+  favorite,
+  flag
 ) => {
+  if (flag === "favorite") {
+    await Recipe.update({ favorite }, { where: { idRecipe } });
+    return await mostrarAllRecipe();
+  }
+
   if (!(await existRecipe(idRecipe))) {
     throw Error`La receta que usted desea modificar no existe`;
   }
