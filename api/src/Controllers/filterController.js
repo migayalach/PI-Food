@@ -1,4 +1,6 @@
-const { Recipe, Diets, DietsRecipe } = require("../db");
+const { clearDataRecipe } = require("../Utils/recipeUtils");
+const { Recipe, Diets } = require("../db");
+const { resesponseData } = require("./helperController");
 const { Op } = require("sequelize");
 
 function arrayFun(diet, array) {
@@ -10,7 +12,7 @@ function arrayFun(diet, array) {
   return false;
 }
 
-function responseData(healthScore, order, diet, data) {
+function responseDataInfo(healthScore, order, diet, data) {
   return data
     .map(
       ({
@@ -38,7 +40,7 @@ function responseData(healthScore, order, diet, data) {
 
 const filterData = async (name, healthScore, order, diets) => {
   if (name && healthScore && order && diets) {
-    return await Recipe.findAll({
+    const dataFilfer = await Recipe.findAll({
       where: { nameRecipe: { [Op.iLike]: `%${name}%` } },
       include: {
         model: Diets,
@@ -47,6 +49,9 @@ const filterData = async (name, healthScore, order, diets) => {
       },
       order: [["healthScore", order]],
     });
+    const results = clearDataRecipe(dataFilfer);
+    const count = results.length;
+    return await resesponseData(results, count, (page = 1));
   }
 
   let orderData = order;
@@ -59,7 +64,7 @@ const filterData = async (name, healthScore, order, diets) => {
     order: [["nameRecipe", orderData]],
   });
 
-  return responseData(healthScore, order, diets, data);
+  return responseDataInfo(healthScore, order, diets, data);
 };
 
 module.exports = { filterData };
