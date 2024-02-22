@@ -13,7 +13,7 @@ const initialState = {
   page: 0,
   diets: [],
   favorites: [],
-  filter: [],
+  filter: false,
   aux: null,
   error: null,
   success: false,
@@ -27,6 +27,7 @@ const reducer = (state = initialState, { type, payload }) => {
         recipes: payload.result,
         page: payload.info.pages,
         success: false,
+        filter: false,
       };
 
     case CREATE_RECIPE:
@@ -63,7 +64,9 @@ const reducer = (state = initialState, { type, payload }) => {
     case FILTER:
       return {
         ...state,
-        filter: payload,
+        recipes: payload.result,
+        page: payload.info.pages,
+        filter: true,
       };
 
     default:
