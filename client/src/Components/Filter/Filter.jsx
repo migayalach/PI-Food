@@ -1,9 +1,18 @@
-import React from 'react'
+// HOOK'S
+import React from "react";
+
+// COMPONENTS
+import Conteiner from "./Conteiner/Conteiner";
+
+// REDUX
+
+// CSS
+import "./filter.css";
+
+// JAVASCRIP
 
 function Filter() {
-  return (
-    <div>Filter</div>
-  )
+  return <Conteiner />;
 }
 
-export default Filter
+export default Filter;
