@@ -6,6 +6,7 @@ import {
   GET_DIETS,
   CREATE_RECIPE,
   FAVORITE,
+  FILTER,
   ERROR,
 } from "./actionsType";
 
@@ -81,6 +82,20 @@ export const postFavorite = (data) => {
       dispatch({
         type: FAVORITE,
         payload: favorite.data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const filterData = ({ name, order, healthScore, diets }) => {
+  return async function (dispatch) {
+    try {
+      const dataFilter = await axios.get(
+        `${URL}/filter/${name}/${order}/${healthScore}/${diets}`
+      );
+      dispatch({
+        type: FILTER,
+        payload: dataFilter.data,
       });
     } catch (error) {}
   };
