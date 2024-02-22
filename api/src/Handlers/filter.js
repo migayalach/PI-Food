@@ -3,7 +3,7 @@ const SUCCESS = 200,
   ERROR = 400;
 
 const getFilterData = async (request, response) => {
-  const { name, healthScore, order, diets } = request.params;
+  const { name, healthScore, order, diets } = request.query;
   try {
     const data = await filterData(name, healthScore, order, diets);
     response.status(SUCCESS).json(data);
