@@ -4,6 +4,7 @@ import {
   GET_DIETS,
   CREATE_RECIPE,
   FAVORITE,
+  FILTER,
   ERROR,
 } from "./actionsType";
 
@@ -12,6 +13,7 @@ const initialState = {
   page: 0,
   diets: [],
   favorites: [],
+  filter: [],
   aux: null,
   error: null,
   success: false,
@@ -56,6 +58,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload.error,
+      };
+
+    case FILTER:
+      return {
+        ...state,
+        filter: payload,
       };
 
     default:
