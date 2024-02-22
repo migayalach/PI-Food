@@ -91,8 +91,9 @@ export const filterData = ({ name, order, healthScore, diets }) => {
   return async function (dispatch) {
     try {
       const dataFilter = await axios.get(
-        `${URL}/filter/${name}/${order}/${healthScore}/${diets}`
+        `${URL}/filter?name=${name}&order=${order}&healthScore=${healthScore}&diets=${diets}`
       );
+      console.log(dataFilter);
       dispatch({
         type: FILTER,
         payload: dataFilter.data,
