@@ -18,11 +18,12 @@ import "./home.css";
 function Home() {
   const dispatch = useDispatch();
   const selectRecipe = useSelector((state) => state.recipes);
-  const selectFilter = useSelector((state) => state.filter);
-  const pages = useSelector((state) => state.page);
-  const [page, setPage] = useState(1);
+  let pages = useSelector((state) => state.page);
+  if (pages === undefined) {
+    pages = 1;
+  }
 
-  console.log(selectFilter);
+  const [page, setPage] = useState(1);
   const pageCurrent = (data) => {
     setPage(data);
   };
